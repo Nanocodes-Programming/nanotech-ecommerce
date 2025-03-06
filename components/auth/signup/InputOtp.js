@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import OtpInput from 'react18-input-otp';
+import OTPInput from 'react-otp-input';
 
 import LoadingIcon from '../../utils/icons/LoadingIcon';
 import Button from '../../utils/reusables/Button';
@@ -47,33 +47,25 @@ const InputOtp = ({ handleClose, handleSignupPage, getAllValues }) => {
     >
       <div className="flex flex-col">
         <div className="flex flex-col mx-3">
-          <OtpInput
+          <OTPInput
             value={state.otp}
             onChange={handleChange}
             numInputs={4}
-            inputStyle={
-              error
-                ? {
-                    outline: 'none',
-                    border: '2px solid red',
-                    borderRadius: '0.375rem',
-                    height: '80px',
-                    width: '100%',
-                    margin: '5px',
-                    padding: '0.9rem 1rem',
-                    fontSize: '24px',
-                  }
-                : {
-                    outline: 'none',
-                    border: '2px solid rgba(0, 20, 51, 0.3)',
-                    borderRadius: '0.375rem',
-                    height: '80px',
-                    width: '100%',
-                    margin: '5px',
-                    padding: '0.9rem 1rem',
-                    fontSize: '24px',
-                    marginTop: '2rem',
-                  }
+            shouldAutoFocus
+            inputType="number"
+            renderInput={(props) => <input {...props} />}
+            inputStyle={{
+              outline: 'none',
+              border: error ? '2px solid red' : '2px solid rgba(0, 20, 51, 0.3)',
+              borderRadius: '0.375rem',
+              height: '80px',
+              width: '100%',
+              margin: '5px',
+              padding: '0.9rem 1rem',
+              fontSize: '24px',
+            }}
+            containerStyle={
+              error ? {} : { marginTop: '2rem' }
             }
           />
 

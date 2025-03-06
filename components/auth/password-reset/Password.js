@@ -6,7 +6,7 @@ import { Cookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import OtpInput from 'react18-input-otp';
+import OTPInput from 'react-otp-input'; // Changed from react18-input-otp to react-otp-input
 import * as yup from 'yup';
 import { API_URL } from '../../../constants/api';
 import { setPasswordResetLoading } from '../../../store/reducers/auth_reducer';
@@ -135,34 +135,26 @@ const Password = ({ setIndexValue, handleClose, getAllValues }) => {
       <div className="mx-2">
         <div className="mb-4">
           <p className="-mb-7">Enter code</p>
-          <OtpInput
+          
+          {/* Changed from react18-input-otp to react-otp-input */}
+          <OTPInput
             value={state?.otp}
             onChange={handleChange}
             numInputs={4}
-            inputStyle={
-              error
-                ? {
-                    outline: 'none',
-                    border: '2px solid red',
-                    borderRadius: '0.375rem',
-                    height: '80px',
-                    width: '100%',
-                    margin: '5px',
-                    padding: '0.9rem 1rem',
-                    fontSize: '24px',
-                  }
-                : {
-                    outline: 'none',
-                    border: '2px solid rgba(0, 20, 51, 0.3)',
-                    borderRadius: '0.375rem',
-                    height: '80px',
-                    width: '100%',
-                    margin: '5px',
-                    padding: '0.9rem 1rem',
-                    fontSize: '24px',
-                    marginTop: '2rem',
-                  }
-            }
+            shouldAutoFocus
+            inputStyle={{
+              outline: 'none',
+              border: error ? '2px solid red' : '2px solid rgba(0, 20, 51, 0.3)',
+              borderRadius: '0.375rem',
+              height: '80px',
+              width: '100%',
+              margin: '5px',
+              padding: '0.9rem 1rem',
+              fontSize: '24px',
+            }}
+            containerStyle={{ marginTop: '2rem' }}
+            inputType="number"
+            renderInput={(props) => <input {...props} />}
           />
         </div>
 

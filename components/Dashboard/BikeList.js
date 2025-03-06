@@ -1,3 +1,4 @@
+'use client'
 import { useDispatch } from 'react-redux';
 import { setAuthModal } from '../../store/reducers/auth_reducer';
 import NoCart from '../utils/icons/NoCart';

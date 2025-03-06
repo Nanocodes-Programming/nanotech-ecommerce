@@ -1,3 +1,4 @@
+'use client'
 import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 

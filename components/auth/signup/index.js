@@ -1,3 +1,4 @@
+'use client'
 import { yupResolver } from '@hookform/resolvers/yup';
 import Modal from '@mui/material/Modal';
 import { useForm } from 'react-hook-form';

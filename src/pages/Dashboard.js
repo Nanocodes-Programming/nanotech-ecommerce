@@ -1,3 +1,4 @@
+'use client'
 import { useDispatch, useSelector } from 'react-redux';
 import DashboardSidebar from '../../components/Dashboard/DashboardSidebar';
 import MainDashboard from '../../components/Dashboard/MainDashboard';

@@ -1,3 +1,4 @@
+'use client'
 import { Drawer } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';

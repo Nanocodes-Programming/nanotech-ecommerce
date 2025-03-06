@@ -1,3 +1,4 @@
+'use client'
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';

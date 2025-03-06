@@ -1,14 +1,16 @@
+'use client'; 
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import * as yup from 'yup';
+import Image from 'next/image'; // Next.js Image component
+import Link from 'next/link'; // Next.js Link component
+import { useRouter } from 'next/navigation'; // Next.js router
 import { API_URL } from '../constants/api';
-import onics_logo from '../images/onicss.png';
 import { scrollToTop } from '../store/actions/customer_actions';
 import { setDashboardPage } from '../store/reducers/dashboard_reducer';
 import FacebookIcon from './utils/icons/FacebookIcon';
@@ -16,6 +18,7 @@ import InstaIcon from './utils/icons/InstaIcon';
 import LoadingIcon from './utils/icons/LoadingIcon';
 import TwitterIcon from './utils/icons/TwitterIcon';
 import InputField from './utils/reusables/InputField';
+import { useDispatch } from 'react-redux';
 
 const styles = {
   main: 'bg-[#000000de] w-full text-white text-lg px-10 xl:px-32 py-7 mt-16',
@@ -36,7 +39,7 @@ const schema = yup.object().shape({
 });
 
 const Footer = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -78,35 +81,43 @@ const Footer = () => {
     }
   };
 
+  const handleNavigation = (path) => {
+    scrollToTop();
+    router.push(path);
+  };
+
+  const handleDashboardNavigation = () => {
+    scrollToTop();
+    dispatch(setDashboardPage('orders'));
+    router.push('/dashboard');
+  };
+
   return (
     <div className={styles?.main}>
       <div>
         <div
-          onClick={() => {
-            scrollToTop();
-            navigate('/');
-          }}
+          onClick={() => handleNavigation('/')}
           className="cursor-pointer"
         >
-          <img src={onics_logo} alt="" className="h-16" />
+          <Image 
+            src="/images/onicss.png" 
+            alt="Onics Logo" 
+            width={64} 
+            height={64} 
+            className="h-16 w-auto"
+          />
         </div>
         <div className={styles?.wrapper}>
           <div className={styles?.optionsWrapper}>
             <p
-              onClick={() => {
-                scrollToTop();
-                navigate('/about');
-              }}
+              onClick={() => handleNavigation('/about')}
               className={styles?.options}
             >
               About
             </p>
             <p className={styles?.options}>Services</p>
             <p
-              onClick={() => {
-                scrollToTop();
-                navigate('/contact');
-              }}
+              onClick={() => handleNavigation('/contact')}
               className={styles?.options}
             >
               Contact
@@ -116,20 +127,13 @@ const Footer = () => {
           <div className={styles?.helpWrapper}>
             <p className="font-semibold">Help</p>
             <p
-              onClick={() => {
-                scrollToTop();
-                navigate('/contact');
-              }}
+              onClick={() => handleNavigation('/contact')}
               className={styles?.options}
             >
               Customer Support
             </p>
             <p
-              onClick={() => {
-                scrollToTop();
-                dispatch(setDashboardPage('orders'));
-                navigate('/dashboard');
-              }}
+              onClick={handleDashboardNavigation}
               className={styles?.options}
             >
               Delivery Details
@@ -143,15 +147,15 @@ const Footer = () => {
               latest products and services.
             </p>
             <div className={styles?.socialIcons}>
-              <a href={socials?.twitter}>
+              <Link href={socials?.twitter || '#'} target="_blank" rel="noopener noreferrer">
                 <TwitterIcon />
-              </a>
-              <a href={socials?.facebook}>
+              </Link>
+              <Link href={socials?.facebook || '#'} target="_blank" rel="noopener noreferrer">
                 <FacebookIcon />
-              </a>
-              <a href={socials?.instagram}>
+              </Link>
+              <Link href={socials?.instagram || '#'} target="_blank" rel="noopener noreferrer">
                 <InstaIcon />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -187,17 +191,17 @@ const Footer = () => {
       <div className="mt-0 lg:mt-12">
         <div>
           <p className="text-center">
-            <a href="/#" className={styles?.anchor}>
+            <Link href="#" className={styles?.anchor}>
               Privacy Policy
-            </a>{' '}
+            </Link>{' '}
             |{' '}
-            <a href="/#" className={styles?.anchor}>
+            <Link href="#" className={styles?.anchor}>
               Terms of Use
-            </a>{' '}
+            </Link>{' '}
             |{' '}
-            <a href="/#" className={styles?.anchor}>
+            <Link href="#" className={styles?.anchor}>
               Refund Policy
-            </a>
+            </Link>
           </p>
         </div>
       </div>

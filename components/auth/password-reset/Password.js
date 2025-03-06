@@ -1,3 +1,4 @@
+'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from '@mui/material';
 import axios from 'axios';

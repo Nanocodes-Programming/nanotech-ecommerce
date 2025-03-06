@@ -1,3 +1,4 @@
+'use client'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { customLogoutUser } from '../../../store/actions/auth_actions';

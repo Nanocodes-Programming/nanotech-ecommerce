@@ -1,3 +1,5 @@
+
+'use client';
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';

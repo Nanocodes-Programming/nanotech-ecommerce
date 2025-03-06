@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import store from '../store';
 import { customLogoutUser } from '../store/actions/auth_actions';
 
 const useAuth = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   // const encryptedPass = useSelector((state) => state.auth.encryptedPass);
 
   // let decryptedPass;

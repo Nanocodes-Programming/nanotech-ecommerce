@@ -1,14 +1,14 @@
 'use client'
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { calculateTotalPrice } from '../../../store/actions/customer_actions';
 import { setAuthModal } from '../../../store/reducers/auth_reducer';
 import BackArrowIcon from '../icons/BackArrowIcon';
 
 const DebitCardDesign = ({ products }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const authenticated = useSelector((state) => state.auth.authenticated);
   const cartItems = useSelector((state) => state.dashboard.cartItems);
 

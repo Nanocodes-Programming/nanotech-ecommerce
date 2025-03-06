@@ -3,7 +3,7 @@ import { Drawer } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import onics_logo from '../../../images/onicss.png';
 import { customLogoutUser } from '../../../store/actions/auth_actions';
 import { setAuthModal } from '../../../store/reducers/auth_reducer';
@@ -11,7 +11,7 @@ import { setDashboardPage } from '../../../store/reducers/dashboard_reducer';
 import { setMobileSideDrawer } from '../../../store/reducers/main_reducer';
 
 const MobileSideDrawer = ({ openDrawer }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const dispatch = useDispatch();
   const cookies = new Cookies();
   const token = cookies.get('token');

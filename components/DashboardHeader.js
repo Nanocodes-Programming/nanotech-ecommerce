@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Cookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
 import onics_logo from '../images/onicss.png';
 import { setAuthModal } from '../store/reducers/auth_reducer';
@@ -35,7 +35,7 @@ const DashboardHeader = () => {
   useAuth();
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const user = cookies.get('user');
   const authenticated = useSelector((state) => state.auth.authenticated);
   const mobileSearch = useSelector((state) => state.main.mobileSearch);

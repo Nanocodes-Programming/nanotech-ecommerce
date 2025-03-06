@@ -1,10 +1,10 @@
 'use client'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { customLogoutUser } from '../../../store/actions/auth_actions';
 
 const OptionsDropdown = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const dispatch = useDispatch();
 
   const userDashboard = () => {

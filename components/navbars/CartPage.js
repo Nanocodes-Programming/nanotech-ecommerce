@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { API_URL } from '../../constants/api';
 import { calculateTotalPrice } from '../../store/actions/customer_actions';
@@ -13,7 +13,7 @@ import CartCard from '../utils/cards/CartCard';
 import NoCart from '../utils/icons/NoCart';
 
 const CartPage = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.dashboard.cartItems);
   const authenticated = useSelector((state) => state.auth.authenticated);

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import onics_logo from '../../images/onicss.png';
 import { customLogoutUser } from '../../store/actions/auth_actions';
 import { setAuthModal } from '../../store/reducers/auth_reducer';
@@ -15,7 +15,7 @@ import orderSvg from '../utils/svgs/orders.svg';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const page = useSelector((state) => state.dashboard.page);
   const cookies = new Cookies();

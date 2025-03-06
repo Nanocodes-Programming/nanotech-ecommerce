@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 import { API_URL } from '../../../constants/api';
 import LoadingIcon from '../icons/LoadingIcon';
@@ -9,7 +9,7 @@ const styles = {
 };
 
 const CategoryCard = ({ product }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const url = `${API_URL}/category/${product?.slug}`;
   const { data: productCategory } = useSWR(url);

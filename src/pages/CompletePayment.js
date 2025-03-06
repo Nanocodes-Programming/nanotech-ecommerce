@@ -4,12 +4,12 @@ import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import DashboardSidebar from '../components/Dashboard/DashboardSidebar';
-import MainDashboard from '../components/Dashboard/MainDashboard';
-import DashboardHeader from '../components/DashboardHeader';
-import { API_URL } from '../constants/api';
-import { setAuthModal } from '../store/reducers/auth_reducer';
-import { setOrderID } from '../store/reducers/payment_reducer';
+import DashboardSidebar from '../../components/Dashboard/DashboardSidebar';
+import MainDashboard from '../../components/Dashboard/MainDashboard';
+import DashboardHeader from '../../components/DashboardHeader';
+import { API_URL } from '../../constants/api';
+import { setAuthModal } from '../../store/reducers/auth_reducer';
+import { setOrderID } from '../../store/reducers/payment_reducer';
 
 const CompletePayment = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import useSWR from 'swr';
-import Header from '../components/Header';
-import FlashCard from '../components/utils/cards/FlashCard';
-import { API_URL } from '../constants/api';
+import Header from '../../components/Header';
+import FlashCard from '../../components/utils/cards/FlashCard';
+import { API_URL } from '../../constants/api';
 
 const Category = () => {
   const windowUrl = window.location.pathname;

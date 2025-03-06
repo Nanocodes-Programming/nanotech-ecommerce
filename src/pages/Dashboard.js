@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import DashboardSidebar from '../components/Dashboard/DashboardSidebar';
-import MainDashboard from '../components/Dashboard/MainDashboard';
-import DashboardHeader from '../components/DashboardHeader';
-import { setAuthModal } from '../store/reducers/auth_reducer';
+import DashboardSidebar from '../../components/Dashboard/DashboardSidebar';
+import MainDashboard from '../../components/Dashboard/MainDashboard';
+import DashboardHeader from '../../components/DashboardHeader';
+import { setAuthModal } from '../../store/reducers/auth_reducer';
 
 const Dashboard = () => {
   const dispatch = useDispatch();

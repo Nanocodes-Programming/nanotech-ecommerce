@@ -8,7 +8,7 @@ import { SWRConfig } from 'swr';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store, { persistor } from './store';
+import store, { persistor } from '../store';
 
 const fetcher = async (...args) => {
   const res = await axios(...args);

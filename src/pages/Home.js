@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Banner from '../components/Banner';
-import MobileDownloadSection from '../components/MobileDownloadSection';
-import Why from '../components/Why';
-import FlashSales from '../components/flash-sales/FlashSales';
-import MainProduct from '../components/product/MainProduct';
-import { customLogoutUser } from '../store/actions/auth_actions';
+import Banner from '../../components/Banner';
+import MobileDownloadSection from '../../components/MobileDownloadSection';
+import Why from '../../components/Why';
+import FlashSales from '../../components/flash-sales/FlashSales';
+import MainProduct from '../../components/product/MainProduct';
+import { customLogoutUser } from '../../store/actions/auth_actions';
 
 const Home = () => {
   const dispatch = useDispatch();

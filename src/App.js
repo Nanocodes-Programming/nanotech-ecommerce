@@ -2,35 +2,35 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from './components/Footer';
-import About from './components/navbars/About';
-import CartPage from './components/navbars/CartPage';
-import Contact from './components/navbars/Contact';
+import Footer from '../components/Footer';
+import About from '../components/navbars/About';
+import CartPage from '../components/navbars/CartPage';
+import Contact from '../components/navbars/Contact';
 import Category from './pages/Category';
 import CompletePayment from './pages/CompletePayment';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 // import { setAuthModal } from './store/reducers/auth_reducer';
 
-const LoginModal = lazy(() => import('../src/components/auth/login/index'));
-const SignupModal = lazy(() => import('../src/components/auth/signup/index'));
-const OrderModal = lazy(() => import('../src/components/Dashboard/NewOrder'));
-const PaymentModal = lazy(() => import('../src/components/Dashboard/Payment'));
+const LoginModal = lazy(() => import('../components/auth/login/index'));
+const SignupModal = lazy(() => import('../components/auth/signup/index'));
+const OrderModal = lazy(() => import('../components/Dashboard/NewOrder'));
+const PaymentModal = lazy(() => import('../components/Dashboard/Payment'));
 const RemoveCartItemModal = lazy(() =>
-  import('../src/components/utils/cards/RemoveCartItem')
+  import('../components/utils/cards/RemoveCartItem')
 );
 const DeliveryModal = lazy(() =>
-  import('../src/components/Dashboard/NewDelivery')
+  import('../components/Dashboard/NewDelivery')
 );
 const ProductCardModal = lazy(() =>
-  import('../src/components/ProductCardModal')
+  import('../components/ProductCardModal')
 );
 const PasswordResetModal = lazy(() =>
-  import('../src/components/auth/password-reset/index')
+  import('../components/auth/password-reset/index')
 );
 
 const ChangePasswordModal = lazy(() =>
-  import('../src/components/auth/change-password/index')
+  import('../components/auth/change-password/index')
 );
 
 // const InterruptModal = lazy(() =>

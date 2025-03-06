@@ -9,7 +9,7 @@ const styles = {
 };
 
 const CategoryCard = ({ product }) => {
-  const navigate = useRouter();
+  const router = useRouter();
 
   const url = `${API_URL}/category/${product?.slug}`;
   const { data: productCategory } = useSWR(url);
@@ -17,7 +17,7 @@ const CategoryCard = ({ product }) => {
   return (
     <div
       onClick={() =>
-        navigate(`/category/${productCategory[0]?.category?.slug}`)
+        router.push(`/category/${productCategory[0]?.category?.slug}`)
       }
       className={styles?.main}
     >

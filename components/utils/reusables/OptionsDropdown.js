@@ -4,15 +4,15 @@ import { useRouter } from 'next/navigation';
 import { customLogoutUser } from '../../../store/actions/auth_actions';
 
 const OptionsDropdown = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const userDashboard = () => {
-    navigate('/dashboard');
+    router.push('/dashboard');
   };
 
   const logOut = () => {
-    dispatch(customLogoutUser(navigate));
+    dispatch(customLogoutUser(router));
   };
 
   return (

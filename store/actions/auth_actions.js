@@ -108,7 +108,7 @@ export const loginAction = ({ username, email, password }, reset) => {
   };
 };
 
-export const customLogoutUser = (navigate, config) => {
+export const customLogoutUser = (router, config) => {
   // const user = cookies.get('user');
   return async (dispatch) => {
     axios
@@ -125,7 +125,7 @@ export const customLogoutUser = (navigate, config) => {
           cookies.remove('user', { path: '/' });
           cookies.remove('date', { path: '/' });
           cookies.remove('refresh_date', { path: '/' });
-          navigate('/');
+          router.push('/');
         }
       })
       .catch((err) => {

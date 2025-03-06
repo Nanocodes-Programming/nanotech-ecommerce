@@ -15,7 +15,7 @@ import orderSvg from '../utils/svgs/orders.svg';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const navigate = useRouter();
+  const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const page = useSelector((state) => state.dashboard.page);
   const cookies = new Cookies();
@@ -31,12 +31,12 @@ const Sidebar = () => {
   };
 
   const homeNavigate = () => {
-    navigate('/');
+    router.push('/');
   };
 
   const logOut = () => {
     setIsLoggingOut(true);
-    dispatch(customLogoutUser(navigate, config));
+    dispatch(customLogoutUser(router, config));
     setTimeout(() => {
       setIsLoggingOut(false);
     }, 15000);

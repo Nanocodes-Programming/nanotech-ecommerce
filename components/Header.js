@@ -35,7 +35,7 @@ const Header = () => {
   useAuth();
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const navigate = useRouter();
+  const router = useRouter();
   const user = cookies.get('user');
   const authenticated = useSelector((state) => state.auth.authenticated);
   const mobileSearch = useSelector((state) => state.main.mobileSearch);
@@ -55,7 +55,7 @@ const Header = () => {
   };
 
   const homeNavigate = () => {
-    navigate('/');
+    router.push('/');
   };
 
   return (
@@ -85,7 +85,7 @@ const Header = () => {
         )}
         <div
           onClick={() => {
-            navigate('/cart');
+            router.push('/cart');
           }}
         >
           {window.location?.pathname === '/cart' ? (
@@ -126,7 +126,7 @@ const Header = () => {
           Order a bike
         </h4>
         <h4
-          onClick={() => navigate('/about')}
+          onClick={() => router.push('/about')}
           className={
             window.location?.pathname === '/about'
               ? `${styles.headerText} text-[#FFB800]`
@@ -136,7 +136,7 @@ const Header = () => {
           About
         </h4>
         <h4
-          onClick={() => navigate('/contact')}
+          onClick={() => router.push('/contact')}
           className={
             window.location?.pathname === '/contact'
               ? `${styles.headerText} text-[#FFB800]`
@@ -147,7 +147,7 @@ const Header = () => {
         </h4>
         {authenticated && (
           <h4
-            onClick={() => navigate('/dashboard')}
+            onClick={() => router.push('/dashboard')}
             className={
               window.location?.pathname === '/dashboard'
                 ? `${styles.headerText} text-[#FFB800]`
@@ -159,7 +159,7 @@ const Header = () => {
         )}
         <div
           onClick={() => {
-            navigate('/cart');
+            router.push('/cart');
           }}
           className="mr-8 cursor-pointer"
         >

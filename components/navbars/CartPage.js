@@ -13,7 +13,7 @@ import CartCard from '../utils/cards/CartCard';
 import NoCart from '../utils/icons/NoCart';
 
 const CartPage = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.dashboard.cartItems);
   const authenticated = useSelector((state) => state.auth.authenticated);
@@ -25,7 +25,7 @@ const CartPage = () => {
     if (authenticated && cartItems?.length) {
       dispatch(setAuthModal('ORDER'));
       dispatch(setDashboardPage('orders'));
-      navigate('/dashboard');
+      router.push('/dashboard');
     } else if (cartItems?.length <= 0) {
       toast.warning('You have no items in your cart', {
         position: toast.POSITION.TOP_RIGHT,

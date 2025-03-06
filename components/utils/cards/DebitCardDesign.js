@@ -8,7 +8,7 @@ import BackArrowIcon from '../icons/BackArrowIcon';
 
 const DebitCardDesign = ({ products }) => {
   const dispatch = useDispatch();
-  const navigate = useRouter();
+  const router = useRouter();
   const authenticated = useSelector((state) => state.auth.authenticated);
   const cartItems = useSelector((state) => state.dashboard.cartItems);
 
@@ -52,7 +52,7 @@ const DebitCardDesign = ({ products }) => {
       <button
         onClick={() => {
           if (authenticated) {
-            navigate('/cart');
+            router.push('/cart');
           } else {
             setLogin();
           }

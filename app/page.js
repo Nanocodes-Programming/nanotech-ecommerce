@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation'; // Changed to Next.js router
+import { useRouter } from 'next/navigation'; 
 import Banner from '../components/Banner';
 import MobileDownloadSection from '../components/MobileDownloadSection';
 import Why from '../components/Why';

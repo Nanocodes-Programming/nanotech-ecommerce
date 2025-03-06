@@ -35,7 +35,7 @@ const DashboardHeader = () => {
   useAuth();
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const navigate = useRouter();
+  const router = useRouter();
   const user = cookies.get('user');
   const authenticated = useSelector((state) => state.auth.authenticated);
   const mobileSearch = useSelector((state) => state.main.mobileSearch);
@@ -54,7 +54,7 @@ const DashboardHeader = () => {
   };
 
   const homeNavigate = () => {
-    navigate('/');
+    router.push('/');
   };
 
   return (
@@ -79,7 +79,7 @@ const DashboardHeader = () => {
         >
           <SearchIcon height={25} width={30} />
         </div>
-        <div onClick={() => navigate('/cart')}>
+        <div onClick={() => router.push('/cart')}>
           <CartIcon color={'#6b7280cc'} />
         </div>
         {mobileSearch && (
@@ -102,24 +102,24 @@ const DashboardHeader = () => {
       </div>
       <div className={styles.textContainer}>
         <h4
-          onClick={() => navigate('/')}
+          onClick={() => router.push('/')}
           className={`${styles.headerText} text-gray-500`}
         >
           Home
         </h4>
         <h4
-          onClick={() => navigate('/about')}
+          onClick={() => router.push('/about')}
           className={`${styles.headerText} text-gray-500`}
         >
           About
         </h4>
         <h4
-          onClick={() => navigate('/contact')}
+          onClick={() => router.push('/contact')}
           className={`${styles.headerText} text-gray-500`}
         >
           Contact
         </h4>
-        <div onClick={() => navigate('/cart')} className="mr-8 cursor-pointer">
+        <div onClick={() => router.push('/cart')} className="mr-8 cursor-pointer">
           <CartIcon color={'#6b7280cc'} />
         </div>
         <div className="flex justify-between items-center gap-2">

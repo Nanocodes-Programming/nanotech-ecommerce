@@ -11,7 +11,7 @@ import { setDashboardPage } from '../../../store/reducers/dashboard_reducer';
 import { setMobileSideDrawer } from '../../../store/reducers/main_reducer';
 
 const MobileSideDrawer = ({ openDrawer }) => {
-  const navigate = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
   const cookies = new Cookies();
   const token = cookies.get('token');
@@ -32,7 +32,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
   };
 
   const logOut = () => {
-    dispatch(customLogoutUser(navigate, config));
+    dispatch(customLogoutUser(router, config));
     dispatch(setMobileSideDrawer(false));
   };
 
@@ -74,7 +74,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
             <div className="flex flex-col gap-3 mt-5 ">
               <div
                 onClick={() => {
-                  navigate('/');
+                  router.push('/');
                   dispatch(setMobileSideDrawer(false));
                 }}
                 className="flex items-center gap-6 cursor-pointer"
@@ -92,7 +92,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
 
               <div
                 onClick={() => {
-                  navigate('/about');
+                  router.push('/about');
                   dispatch(setMobileSideDrawer(false));
                 }}
                 className="flex items-center gap-6"
@@ -110,7 +110,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
 
               <div
                 onClick={() => {
-                  navigate('/contact');
+                  router.push('/contact');
                   dispatch(setMobileSideDrawer(false));
                 }}
                 className={'flex items-center gap-6 mb-5'}
@@ -135,7 +135,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                 <div
                   onClick={() => {
                     dispatch(setDashboardPage('dashboard'));
-                    navigate('/dashboard');
+                    router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
                   className="flex items-center gap-6"
@@ -154,7 +154,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                 <div
                   onClick={() => {
                     dispatch(setDashboardPage('orders'));
-                    navigate('/dashboard');
+                    router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
                   className="flex items-center gap-6"
@@ -173,7 +173,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                 <div
                   onClick={() => {
                     dispatch(setDashboardPage('bike'));
-                    navigate('/dashboard');
+                    router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
                   className="flex items-center gap-6"

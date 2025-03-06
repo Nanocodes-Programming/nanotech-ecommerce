@@ -5,7 +5,7 @@ import store from '../store';
 import { customLogoutUser } from '../store/actions/auth_actions';
 
 const useAuth = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   // const encryptedPass = useSelector((state) => state.auth.encryptedPass);
 
   // let decryptedPass;
@@ -30,10 +30,10 @@ const useAuth = () => {
     if (token) {
       if (isExpired !== true) {
         console.log('expired token');
-        store.dispatch(customLogoutUser(navigate));
+        store.dispatch(customLogoutUser(router));
       }
     }
-  }, [navigate]);
+  }, [router]);
 
   // useEffect(() => {
   //   const cookies = new Cookies();

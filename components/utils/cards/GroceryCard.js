@@ -54,7 +54,7 @@ const GroceryCard = ({ product }) => {
   return (
     <div className={styles?.main}>
       <div className="pt-10 pl-10 pr-10 pb-0 rounded-md max-h-44 overflow-hidden">
-        <img src={`${product?.image}`} alt="grocery" width={150} />
+        <img src={`${product?.image?.src}`} alt="grocery" width={150} />
       </div>
       <div className="flex flex-col mb-3">
         <p className={styles?.title}>

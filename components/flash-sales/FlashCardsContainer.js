@@ -24,8 +24,11 @@ const FlashCardsContainer = () => {
           </div>
         )} */}
         <div className={styles?.flashCardWrapper}>
-          {products?.map((product) => (
-            <FlashCard product={product} key={product._id} />
+          {products?.map((product, index) => (
+            <FlashCard 
+              product={product} 
+              key={product._id || product.id || `product-${index}`} 
+            />
           ))}
           {products === undefined && <FlashCardSkeleton />}
         </div>

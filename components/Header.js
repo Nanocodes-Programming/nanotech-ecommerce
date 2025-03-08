@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
-import onics_logo from '../images/onicss.png';
+// import onics_logo from '../images/onicss.png';
+import onics_logo from '@/images/onicss.png';
 import { setAuthModal } from '../store/reducers/auth_reducer';
 import {
   setMobileSearch,
@@ -62,7 +63,7 @@ const Header = () => {
     <nav className={styles.main}>
       <div onClick={homeNavigate} className="cursor-pointer">
         {/* <OnicsIcon /> */}
-        <img src={onics_logo} alt="" className="h-16" />
+        <img src={onics_logo.src} alt="" className="h-16" />
       </div>
       {/* <div className={styles.search}>
         <input placeholder="Search" className={styles.searchInput} />

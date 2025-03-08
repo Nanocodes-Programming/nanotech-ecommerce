@@ -63,7 +63,7 @@ const DashboardHeader = () => {
         onClick={homeNavigate}
         className="inline-block md:hidden cursor-pointer ml-2"
       >
-        <img src={onics_logo} alt="" className="h-16" />
+        <img src={onics_logo.src} alt="" className="h-16" />
       </div>
       {/* <div className={styles.search}>
         <input placeholder="Search" className={styles.searchInput} />

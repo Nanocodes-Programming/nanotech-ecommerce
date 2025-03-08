@@ -11,7 +11,7 @@ const OrderCard = ({ itemDetails, orderedItem, orderedItemsArr }) => {
         <div className="flex items-center justify-between">
           <div className="flex justify-start items-center gap-2">
             <div className="h-16 w-16 overflow-hidden">
-              <img src={`${product?.image}`} alt="order" />
+              <img src={`${product?.image.src}`} alt="order" />
             </div>
             <div>
               <p className="text-[#0000009e] text-base md:text-lg capitalize">

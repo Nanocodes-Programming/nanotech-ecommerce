@@ -1,5 +1,5 @@
-import grocery2 from '../images/grocery-png.png';
-import grocery from '../images/transparent-background-removebg.png';
+import grocery2 from '@/images/grocery-png.png';
+import grocery from '@/images/transparent-background-removebg.png';
 import Header from './Header';
 import Ellipse1 from './utils/icons/Ellipse1';
 import Ellipse2 from './utils/icons/Ellipse2';
@@ -19,7 +19,7 @@ const Banner = () => {
   return (
     <div className={styles?.main}>
       <Header />
-      <img src={grocery} alt="" className={styles?.groceryImg} />
+      <img src={grocery.src} alt="" className={styles?.groceryImg} />
       <div className={styles?.ellipse1}>
         <Ellipse1 />
       </div>
@@ -33,7 +33,7 @@ const Banner = () => {
         </h3>
       </div>
 
-      <img src={grocery2} alt="" className={styles?._groceryImg} />
+      <img src={grocery2.src} alt="" className={styles?._groceryImg} />
       {/* top-72 */}
     </div>
   );

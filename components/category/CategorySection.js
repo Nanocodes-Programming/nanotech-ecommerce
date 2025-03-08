@@ -13,7 +13,7 @@ const CategorySection = () => {
   return (
     <div className={styles?.main}>
       <div className="absolute right-0 -z-10">
-        <img src={fresh} alt="" width={300} />
+        <img src={fresh.src} alt="" width={300} />
       </div>
       <div className={styles?.titleWrapper}>
         <p className={styles?.title}>Enjoy your favorite grocery items</p>

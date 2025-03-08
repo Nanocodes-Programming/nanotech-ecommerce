@@ -12,7 +12,7 @@ const Feedback = () => {
   return (
     <div className={styles?.main}>
       <div className={styles?.imgWrapper}>
-        <img src={fresh2} alt="" width={300} />
+        <img src={fresh2.src} alt="" width={300} />
       </div>
       <div className={styles?.titleWrapper}>
         <div className={styles?.titleBar} />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { toast } from 'react-toastify';
+import { toast, Bounce } from 'react-toastify'; // Import toast positions
 import { API_URL } from '../../constants/api';
 import {
   setAuthModal,
@@ -130,7 +130,7 @@ export const customLogoutUser = (router, config) => {
       })
       .catch((err) => {
         toast.error('An error occured, try again', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
         });

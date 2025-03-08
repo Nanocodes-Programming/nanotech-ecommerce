@@ -50,7 +50,7 @@ const Sidebar = () => {
             onClick={homeNavigate}
             className="cursor-pointer hidden xl:inline-block"
           >
-            <img src={onics_logo} alt="" className="h-16" />
+            <img src={onics_logo.src} alt="" className="h-16" />
           </div>
           {/* <div className="mb-5">
             <Avatar src="" alt="" sx={{ width: 80, height: 80 }} />
@@ -67,7 +67,7 @@ const Sidebar = () => {
                 : 'flex items-center px-5 py-3 cursor-pointer text-white my-4 transition ease-in-out delay-10'
             }
           >
-            <img src={dashboardSvg} alt="" />
+            <img src={dashboardSvg.src} alt="" />
             <p className="ml-2 font-semibold">Dashboard</p>
           </div>
           <div
@@ -89,7 +89,7 @@ const Sidebar = () => {
                 : 'flex items-center px-5 py-3 mt-5 cursor-pointer text-white my-5 transition ease-in-out delay-10'
             }
           >
-            <img src={orderSvg} alt="" />
+            <img src={orderSvg.src} alt="" />
             <p className="ml-2 font-semibold">Orders</p>
           </div>
           <div
@@ -100,7 +100,7 @@ const Sidebar = () => {
                 : 'flex items-center px-5 py-3 mt-5 cursor-pointer text-white my-5 transition ease-in-out delay-10'
             }
           >
-            <img src={orderSvg} alt="" />
+            <img src={orderSvg.src} alt="" />
             <p className="ml-2 font-semibold">Bike</p>
           </div>
         </div>

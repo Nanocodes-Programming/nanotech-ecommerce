@@ -34,9 +34,9 @@ const MobileDownloadSection = () => {
     <div className={styles?.main}>
       <div className={styles?.titleContainer}>
         <div className={styles?.svgWrapper}>
-          <img src={mobileGreenSvg} alt="" />
-          <img src={mobilePinkSvg} alt="" className={styles?.pinkSvg} />
-          <img src={mobileSvg} alt="" className={styles?._mobileSvg} />
+          <img src={mobileGreenSvg.src} alt="" />
+          <img src={mobilePinkSvg.src} alt="" className={styles?.pinkSvg} />
+          <img src={mobileSvg.src} alt="" className={styles?._mobileSvg} />
         </div>
         <div className={styles?.titleWrapper}>
           <p className="font-bold text-3xl lg:text-5xl pb-7">
@@ -56,7 +56,7 @@ const MobileDownloadSection = () => {
           </div>
         </div> */}
         <div onClick={handlePlayDownload} className={styles?.btnWrapper}>
-          <img src={PlayStoreSvg} alt="" />
+          <img src={PlayStoreSvg.src} alt="" />
           <div className="flex-1">
             <p className={styles?.downloadText}>Download on the</p>
             <p className={styles?.text}>Play store</p>

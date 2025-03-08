@@ -51,7 +51,7 @@ const AutoSearch = () => {
       <div className="flex items-center justify-between my-1">
         <div className="flex items-center gap-3 cursor-pointer">
           <div className="h-10 w-10 overflow-hidden">
-            <img src={`${item?.image}`} alt="onics" />
+            <img src={`${item?.image.src}`} alt="onics" />
           </div>
           <span className="block text-left capitalize text-[#0000009e] md:text-lg">
             {item.name}

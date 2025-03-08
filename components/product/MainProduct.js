@@ -17,7 +17,7 @@ const MainProduct = () => {
   return (
     <div className="flex flex-col mb-[12rem] gap-5">
       <div className="absolute right-0 -z-10">
-        <img src={fresh} alt="" width={300} />
+        <img src={fresh.src} alt="" width={300} />
       </div>
       <div className="w-full flex flex-col md:flex-row items-center p-3 gap-10">
         <p className="xl:ml-28 lg:ml-24 md:ml-12 font-bold text-3xl">
@@ -55,6 +55,7 @@ const MainProduct = () => {
           </div>
           {categories?.map((category) => (
             <NewCategoryCard
+              key={category.id || category._id || category.slug || `category-${Math.random()}`}
               category={category}
               setProdCat={setProdCat}
               prodCat={prodCat}

@@ -70,7 +70,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
       <Drawer anchor="left" open={openDrawer} onClose={handleDrawerClose}>
         <div className="flex flex-col lg:hidden h-full justify-between w-[100%] pl-5  pb-5 pt-4 text-gray-700 overflow-x-hidden">
           <div className="pr-28">
-            <img src={onics_logo} alt="" className="h-16" />
+            <img src={onics_logo.src} alt="" className="h-16" />
             <div className="flex flex-col gap-3 mt-5 ">
               <div
                 onClick={() => {

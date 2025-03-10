@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import Banner from '../components/Banner';
 import MobileDownloadSection from '../components/MobileDownloadSection';
 import Why from '../components/Why';
@@ -13,7 +13,7 @@ import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const router = useRouter(); 
+  const router = useRouter();
 
   useEffect(() => {
     const cookies = new Cookies();
@@ -35,14 +35,14 @@ export default function Home() {
       dispatch(customLogoutUser(navigateFunction, config));
     }
   }, [dispatch, router]);
-  
+
   return (
     <div>
       <Banner />
-{/* <PromotionalBannerCarousel /> */}
+      <PromotionalBannerCarousel />
       <FlashSales />
       <MainProduct />
-   
+
       <MobileDownloadSection />
     </div>
   );

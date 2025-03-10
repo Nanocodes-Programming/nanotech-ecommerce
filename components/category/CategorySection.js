@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import fresh from '../../images/fresh-fruits1.png'; // You might want to replace this with a tech image
+import fresh from '../../images/headset.png'; // You might want to replace this with a tech image
 import CategoryCardContainer from './CategoryCardContainer';
 
 const styles = {

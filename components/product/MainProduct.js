@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 import { API_URL } from '../../constants/api';
-import fresh from '../../images/fresh-fruits1.png';
+import fresh from '../../images/switch.png';
 import groceryImg from '../../images/grocery-png.png';
 import AutoSearch from '../AutoSearch';
 import MobileSearchBar from '../utils/reusables/MobileSearchBar';

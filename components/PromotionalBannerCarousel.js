@@ -13,7 +13,7 @@ const styles = {
   carouselTrack: 'flex transition-transform duration-500 ease-out',
   slide: 'w-full flex-shrink-0 relative',
   bannerLink: 'block w-full h-full',
-  bannerImage: 'w-full h-[300px] object-contain object-center',
+  bannerImage: 'w-full h-[300px] object-cover object-center',
   loadingPlaceholder: 'w-full h-[300px] bg-gray-100 animate-pulse flex items-center justify-center',
   loadingText: 'text-gray-400 text-sm',
   indicators: 'flex justify-center gap-2 mt-4',

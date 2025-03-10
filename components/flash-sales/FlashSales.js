@@ -10,11 +10,7 @@ const styles = {
 const FlashSales = () => {
   return (
     <div className="flex flex-col mb-5">
-      <div className={styles?.main}>
-        <div className={styles?.titleBar} />
-        <div className={styles?.title}>Flash Sales</div>
-        <div className={styles?.titleBar} />
-      </div>
+      
       {/* <div className={styles?.countWrapper}>
         <Countdown count={'02'} time={'DAYS'} />
         <Countdown count={'14'} time={'HOURS'} />

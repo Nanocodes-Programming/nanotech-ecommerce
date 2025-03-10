@@ -6,7 +6,7 @@ import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
 // import onics_logo from '../images/onicss.png';
-import onics_logo from '@/images/onicss.png';
+import onics_logo from '@/images/NANOTECH_022535.svg';
 import { setAuthModal } from '../store/reducers/auth_reducer';
 import {
   setMobileSearch,

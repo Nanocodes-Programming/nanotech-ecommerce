@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <Why />
+      {/* <Why /> */}
       <FlashSales />
       <MainProduct />
       {/* <CategorySection />

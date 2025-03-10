@@ -12,15 +12,22 @@ import { setCartItems } from '../../../store/reducers/dashboard_reducer';
 import { setProductDetails } from '../../../store/reducers/main_reducer';
 import LikeIIcon from '../icons/LikeIIcon';
 import LikedIcon from '../icons/LikedIcon';
-import PlusIcon from '../icons/PlusIcon';
 
 const styles = {
-  main: 'flex flex-col justify-between min-w-[15rem] max-w-[15rem] mt-5 mb-3 border-2 bg-gradient-to-r from-green-600 to-yellow-400 p-[1px] rounded-2xl cursor-pointer',
-  infoContainer:
-    'flex flex-col justify-between h-[5rem] p-2 bg-white rounded-b-2xl',
-  price: 'text-sm text-[#00000080] line-through -mb-1 font-semibold',
-  netWeightContainer: 'flex items-center justify-between',
-  netWeightWrapper: 'flex items-center text-[#00000080] font-semibold',
+  main: 'group flex flex-col justify-between w-60 rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-cardFadeIn',
+  imageContainer: 'relative w-full h-44 bg-white p-2 flex items-center justify-center overflow-hidden',
+  productImage: 'max-h-40 max-w-full object-contain transition-transform duration-500 group-hover:scale-105 animate-imageReveal',
+  discountBadge: 'absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-md animate-badgePulse z-10',
+  favoriteButton: 'absolute top-2 right-2 bg-white p-1.5 rounded-full shadow-sm hover:shadow-md transition-all transform hover:scale-110 active:scale-95',
+  infoContainer: 'flex flex-col p-3 border-t border-gray-100 animate-contentSlideUp',
+  productName: 'text-sm font-medium text-gray-800 mb-1 line-clamp-1',
+  spacer: 'h-1',
+  priceSection: 'flex justify-between items-end mt-1',
+  priceContainer: 'flex flex-col',
+  originalPrice: 'text-xs text-gray-400 line-through font-medium',
+  discountPrice: 'text-sm font-bold text-blue-600',
+  addButton: 'bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors',
+  stockLabel: 'text-xs font-medium text-green-600 mt-1',
 };
 
 const fetcher = async (url, authDetails) => {
@@ -33,8 +40,16 @@ const FlashCard = ({ product }) => {
   const cookies = new Cookies();
   const user = cookies.get('user');
   const token = cookies.get('token');
+  const [loaded, setLoaded] = useState(false);
   const [isFavourite, setFavourite] = useState();
   const authenticated = useSelector((state) => state.auth.authenticated);
+
+  // Calculate discount percentage
+  const originalPrice = product?.real_price || 0;
+  const discountPrice = product?.discount_price || 0;
+  const discountPercentage = originalPrice > 0 
+    ? Math.round(((originalPrice - discountPrice) / originalPrice) * 100) 
+    : 0;
 
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +60,8 @@ const FlashCard = ({ product }) => {
     fetcher(url, config)
   );
 
-  const addToCart = () => {
+  const addToCart = (e) => {
+    e.stopPropagation();
     const cartData = {
       product_id: product?.id,
       quantity: 1,
@@ -61,7 +77,8 @@ const FlashCard = ({ product }) => {
     });
   };
 
-  const handleFavorite = async () => {
+  const handleFavorite = async (e) => {
+    e.stopPropagation();
     try {
       const checkFavorite = getFavourite(favourites, product?.slug, user?.pk);
 
@@ -75,7 +92,7 @@ const FlashCard = ({ product }) => {
             config
           );
 
-          toast.success(`${product?.name} has been added to your favourite`, {
+          toast.success(`${product?.name} has been added to your favourites`, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
             hideProgressBar: false,
@@ -87,63 +104,146 @@ const FlashCard = ({ product }) => {
         dispatch(setAuthModal('LOGIN'));
       }
     } catch (err) {
-      // console.log(err);
       return err;
     }
   };
 
+  useEffect(() => {
+    // Trigger animations after component mounts
+    setLoaded(true);
+    
+    // Add animation keyframes
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes cardFadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes imageReveal {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      
+      @keyframes contentSlideUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes badgePulse {
+        0% { opacity: 0; transform: scale(0.8); }
+        70% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      
+      @keyframes pricePulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      
+      .animate-cardFadeIn {
+        animation: cardFadeIn 0.5s ease-out forwards;
+      }
+      
+      .animate-imageReveal {
+        animation: imageReveal 0.7s ease-out forwards;
+      }
+      
+      .animate-contentSlideUp {
+        animation: contentSlideUp 0.5s ease-out forwards;
+        animation-delay: 0.2s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+      
+      .animate-badgePulse {
+        animation: badgePulse 0.5s ease-out forwards;
+        animation-delay: 0.4s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+      
+      .animate-pricePulse {
+        animation: pricePulse 2s ease-in-out infinite;
+        animation-delay: 0.6s;
+      }
+      
+      .animate-fadeIn {
+        animation: fadeIn 0.5s ease-out forwards;
+        animation-delay: 0.7s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  // Check if product is in favorites
   useEffect(() => {
     const checkFavorite = getFavourite(favourites, product?.slug, user?.pk);
     setFavourite(checkFavorite);
   }, [favourites, product, user]);
 
   return (
-    <div className={styles?.main}>
-      <div
-        onClick={() => {
-          dispatch(setProductDetails(product));
-          dispatch(setAuthModal('PRODUCT_DETAILS'));
-        }}
-        className="mr-auto ml-auto mt-auto mb-auto bg-transparent max-h-44 overflow-hidden"
-      >
+    <div 
+      className={styles.main}
+      onClick={() => {
+        dispatch(setProductDetails(product));
+        dispatch(setAuthModal('PRODUCT_DETAILS'));
+      }}
+    >
+      {/* Image section */}
+      <div className={styles.imageContainer}>
+        {discountPercentage > 0 && (
+          <div className={styles.discountBadge}>-{discountPercentage}%</div>
+        )}
+        <button 
+          className={styles.favoriteButton}
+          onClick={handleFavorite}
+          aria-label={isFavourite ? "Remove from favorites" : "Add to favorites"}
+        >
+          {isFavourite ? <LikedIcon /> : <LikeIIcon />}
+        </button>
         <img
           src={`${product?.image}`}
-          width={215}
-          alt="flash sales"
-          className="rounded-t-2xl mt-[1px]"
+          alt={product?.name || "Product image"}
+          className={styles.productImage}
         />
       </div>
-      <div className={styles?.infoContainer}>
-        <div className="flex items-center gap-2">
-          <p className="text-sm xl:text-base font-semibold capitalize">
-            {product?.name?.length > 11
-              ? `${product?.name?.slice(0, 12)}...`
-              : `${product?.name}`}
-          </p>
-          <span className={styles?.price}>{`N${product?.real_price}`}</span>
-          <div className="cursor-pointer">
-            {isFavourite ? (
-              <LikedIcon />
-            ) : (
-              <div onClick={handleFavorite}>
-                <LikeIIcon />
-              </div>
+      
+      {/* Info section */}
+      <div className={styles.infoContainer}>
+        <h3 className={styles.productName}>{product?.name}</h3>
+        
+        <div className={styles.spacer}></div>
+        
+        <div className={styles.priceSection}>
+          <div className={styles.priceContainer}>
+            {originalPrice > 0 && (
+              <span className={styles.originalPrice}>₦{originalPrice.toLocaleString()}</span>
             )}
+            <span className={styles.discountPrice}>₦{discountPrice.toLocaleString()}</span>
           </div>
-        </div>
-
-        <div className={styles?.netWeightContainer}>
-          <div className={styles?.netWeightWrapper}>
-            <span className="line-through">N</span>
-            <span>{product?.discount_price}</span>
-          </div>
-          <div
+          
+          <button 
+            className={styles.addButton}
             onClick={addToCart}
-            className="bg-[#ffb800] p-1 rounded-md cursor-pointer"
+            aria-label="Add to cart"
           >
-            <PlusIcon />
-          </div>
+            Add to Cart
+          </button>
         </div>
+        
+        <p className={styles.stockLabel}>In Stock</p>
       </div>
     </div>
   );

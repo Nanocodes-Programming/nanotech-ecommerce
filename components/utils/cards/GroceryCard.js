@@ -1,15 +1,16 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setCartItems } from '../../../store/reducers/dashboard_reducer';
 import AddToCartIcon from '../icons/AddToCartIcon';
+import Link from 'next/link';
 
-// Renamed both component and file to match
 const GroceryCard = ({ product }) => {
   const dispatch = useDispatch();
   const [cartQty, setCartQty] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   // Safe getter function for product properties
   const getProductProp = (prop) => {
@@ -32,6 +33,15 @@ const GroceryCard = ({ product }) => {
   // Stock status logic
   const stockLevel = product?.stock_level || product?.quantity || 10;
   const stockStatus = stockLevel > 5 ? 'In Stock' : stockLevel > 0 ? 'Low Stock' : 'Out of Stock';
+  
+  // Stock status color
+  const stockStatusColor = 
+    stockLevel > 5 ? 'text-green-600' : 
+    stockLevel > 0 ? 'text-yellow-600' : 
+    'text-red-600';
+
+  // Create product URL
+  const productUrl = `/products/${product?.slug || product?.id || ''}`;
 
   const increaseQty = () => {
     if (stockLevel > 0) {
@@ -73,69 +83,99 @@ const GroceryCard = ({ product }) => {
       icon: "🛒",
     });
   };
-
-  // Inline styles to avoid potential reference issues
-  const styles = {
-    main: 'flex flex-col justify-between w-full max-w-[15rem] h-[20rem] rounded-lg bg-white shadow-md hover:shadow-xl transition-all duration-300 p-3 m-1 mb-5 relative group overflow-hidden',
-    imageContainer: 'pt-2 px-2 pb-1 flex items-center justify-center h-44 overflow-hidden transition-all duration-300',
-    image: 'object-contain h-full w-full transition-all duration-500 group-hover:scale-105',
-    contentContainer: 'flex flex-col px-1 transition-all duration-300',
-    title: 'text-base font-medium text-gray-800 capitalize line-clamp-2 min-h-[2.5rem] transition-colors duration-300 group-hover:text-blue-700',
-    priceContainer: 'flex items-center mt-2 mb-2',
-    discountPrice: 'text-lg font-bold text-gray-900',
-    originalPrice: 'text-sm text-gray-400 line-through ml-2',
-    btnContainer: 'flex justify-between items-center mt-auto',
-    quantityWrapper: 'flex items-center gap-1',
-    quantityBtn: 'w-8 h-8 flex items-center justify-center text-blue-600 hover:text-blue-800 hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200 rounded-md',
-    quantityDisplay: 'w-8 text-center font-medium text-gray-800 mx-1',
-    addToCartBtn: 'flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md text-white font-medium text-sm gap-2 transition-all duration-200 hover:shadow-md',
-    stockStatus: 'text-xs font-medium text-right mt-1 text-green-600',
-  };
+  
+  // Clear add animation after timeout
+  useEffect(() => {
+    if (isAdded) {
+      const timer = setTimeout(() => setIsAdded(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isAdded]);
 
   return (
-    <div className={styles.main}>
-      {/* Product image - Fixed to safely handle potentially undefined image sources */}
-      <div className={styles.imageContainer}>
+    <div 
+      className={`flex flex-col justify-between w-full max-w-[15rem] h-[22rem] rounded-xl bg-white overflow-hidden relative group ${
+        isAdded ? 'animate-pulse' : ''
+      } transition-all duration-300 transform ${
+        isHovering ? 'shadow-lg scale-[1.02]' : 'shadow-md scale-100'
+      }`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Discount badge if applicable */}
+      {discountPercent && (
+        <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md z-10 transform -rotate-2">
+          -{discountPercent}%
+        </div>
+      )}
+      
+      {/* View Details Button */}
+      <Link 
+        href={productUrl}
+        className={`absolute inset-x-0 top-1/3 flex justify-center z-10 transition-opacity duration-300 ${
+          isHovering ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <span className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-800 shadow-md">
+          View Details
+        </span>
+      </Link>
+
+      {/* Product image with zoom effect - LARGER */}
+      <Link href={productUrl} className="block relative overflow-hidden h-60 bg-gradient-to-br from-gray-50 to-gray-100">
         {product && product.image ? (
-          <img 
-            src={product.image}
-            alt={nameDisplay || "Tech gadget"} 
-            className={styles.image}
-          />
+          <div className="h-full w-full flex items-center justify-center">
+            <img 
+              src={product.image}
+              alt={nameDisplay || "Tech gadget"} 
+              className={`object-contain max-h-full transition-transform duration-700 ${
+                isHovering ? 'scale-110' : 'scale-100'
+              }`}
+            />
+          </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
             No Image
           </div>
         )}
-      </div>
+        
+        {/* Light shine effect on hover */}
+        <div className={`absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-1000 ${
+          isHovering ? 'translate-x-full' : '-translate-x-full'
+        }`}></div>
+      </Link>
 
-      {/* Product details */}
-      <div className={styles.contentContainer}>
+      {/* Product details - SMALLER */}
+      <div className="flex flex-col p-3 flex-grow">
         {/* Product name */}
-        <h3 className={styles.title}>
-          {nameDisplay}
-        </h3>
+        <Link href={productUrl}>
+          <h3 className={`text-sm font-medium capitalize line-clamp-1 transition-colors duration-300 ${
+            isHovering ? 'text-blue-700' : 'text-gray-800'
+          }`}>
+            {nameDisplay}
+          </h3>
+        </Link>
         
         {/* Price information */}
-        <div className={styles.priceContainer}>
-          <span className={styles.discountPrice}>₦{getProductProp('discount_price')}</span>
+        <div className="flex items-center mt-1 mb-1">
+          <span className="text-base font-bold text-gray-900">₦{getProductProp('discount_price')}</span>
           {product?.original_price && (
-            <span className={styles.originalPrice}>₦{getProductProp('original_price')}</span>
+            <span className="text-xs text-gray-400 line-through ml-2">₦{getProductProp('original_price')}</span>
           )}
-        </div>
-
-        {/* Stock status indicator */}
-        <div className={styles.stockStatus}>
-          {stockStatus}
+          
+          {/* Stock status indicator - Inline */}
+          <div className={`text-xs font-medium ml-auto ${stockStatusColor}`}>
+            {stockStatus}
+          </div>
         </div>
 
         {/* Add to cart controls */}
-        <div className={styles.btnContainer}>
-          <div className={styles.quantityWrapper}>
+        <div className="flex justify-between items-center pt-1">
+          <div className="flex items-center gap-1">
             {cartQty > 0 && (
               <button 
                 onClick={reduceQty} 
-                className={styles.quantityBtn}
+                className="w-7 h-7 flex items-center justify-center text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-all duration-200 cursor-pointer border border-gray-200 rounded-md"
                 aria-label="Decrease quantity"
               >
                 −
@@ -143,12 +183,12 @@ const GroceryCard = ({ product }) => {
             )}
             
             {cartQty > 0 && (
-              <span className={styles.quantityDisplay}>{cartQty}</span>
+              <span className="w-6 text-center font-medium text-gray-800">{cartQty}</span>
             )}
             
             <button 
               onClick={increaseQty} 
-              className={styles.quantityBtn}
+              className="w-7 h-7 flex items-center justify-center text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-all duration-200 cursor-pointer border border-gray-200 rounded-md"
               aria-label="Increase quantity"
               disabled={stockLevel === 0}
             >
@@ -158,12 +198,15 @@ const GroceryCard = ({ product }) => {
 
           <button 
             onClick={addToCart} 
-            className={styles.addToCartBtn}
+            className={`flex items-center justify-center px-3 py-1.5 rounded-md text-white font-medium text-xs gap-1 transition-all duration-200 hover:shadow-md ${
+              isAdded ? 'bg-green-600' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
             disabled={stockLevel === 0}
             aria-label="Add to cart"
           >
             <AddToCartIcon />
             {cartQty > 0 && <span>Add</span>}
+            {isAdded && <span>✓</span>}
           </button>
         </div>
       </div>

@@ -11,6 +11,7 @@ import MainProduct from '../components/product/MainProduct';
 import { customLogoutUser } from '../store/actions/auth_actions';
 import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
 
+
 export default function Home() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,7 +43,6 @@ export default function Home() {
       <PromotionalBannerCarousel />
       <FlashSales />
       <MainProduct />
-
       <MobileDownloadSection />
     </div>
   );

@@ -9,6 +9,7 @@ import Why from '../components/Why';
 import FlashSales from '../components/flash-sales/FlashSales';
 import MainProduct from '../components/product/MainProduct';
 import { customLogoutUser } from '../store/actions/auth_actions';
+import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -38,12 +39,10 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      {/* <Why /> */}
+{/* <PromotionalBannerCarousel /> */}
       <FlashSales />
       <MainProduct />
-      {/* <CategorySection />
-      <GrocerySection /> */}
-      {/* <Feedback /> */}
+   
       <MobileDownloadSection />
     </div>
   );

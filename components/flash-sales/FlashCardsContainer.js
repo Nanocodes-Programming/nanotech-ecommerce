@@ -6,25 +6,24 @@ import FlashCard from '../utils/cards/FlashCard';
 import FlashCardSkeleton from '../utils/skeletons/FlashCardSkeleton';
 
 const styles = {
-  container: 'w-full bg-gray-50 py-10 px-4',
+  container: 'w-full bg-white py-6 px-4',
   innerContainer: 'max-w-7xl mx-auto',
-  headerSection: 'text-center mb-8',
-  titleContainer: 'relative inline-block',
-  title: 'text-2xl font-bold text-gray-800 mx-auto relative z-10',
-  titleLine: 'absolute left-0 right-0 h-0.5 bg-blue-600 bottom-0 z-0',
-  flashSaleWrapper: 'flex items-center justify-center gap-3 mb-6',
-  flashIcon: 'text-yellow-500 w-6 h-6',
-  counterSection: 'flex items-center justify-center gap-4 mb-6',
-  timeUnit: 'bg-blue-600 text-white text-xl font-bold rounded-md px-4 py-2 min-w-[60px] text-center',
-  timeSeparator: 'text-2xl font-bold text-gray-400',
-  unitLabel: 'text-xs text-gray-500 mt-1 text-center',
-  productsRow: 'flex flex-wrap justify-center gap-6 max-w-6xl mx-auto',
-  viewAllButton: 'bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-6 py-2 mt-8 transition-all duration-300 mx-auto block',
-  navigationContainer: 'flex items-center justify-center mt-10 gap-4',
-  navButton: 'flex items-center justify-center w-10 h-10 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow text-blue-600 transition-all',
-  navDisabled: 'opacity-50 cursor-not-allowed',
-  navArrow: 'w-5 h-5',
-  pageIndicator: 'text-sm text-gray-600',
+  headerSection: 'flex items-center justify-between mb-6',
+  titleContainer: 'flex items-center',
+  title: 'text-xl font-bold text-gray-800 flex items-center',
+  flashIcon: 'text-yellow-400 w-5 h-5 mr-2',
+  timeLeft: 'text-gray-700 font-medium ml-2',
+  viewAllLink: 'text-blue-600 font-medium hover:underline flex items-center',
+  arrowIcon: 'w-4 h-4 ml-1',
+  carouselContainer: 'relative overflow-x-auto hide-scrollbar pb-4',
+  carouselTrack: 'flex gap-6 w-max',
+  scrollButtons: 'hidden md:flex items-center justify-between absolute top-1/2 left-0 right-0 -translate-y-1/2 z-10 px-1 pointer-events-none',
+  scrollButton: 'w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md pointer-events-auto cursor-pointer hover:bg-gray-100 border border-gray-200',
+  navArrow: 'w-5 h-5 text-blue-600',
+  progressContainer: 'mt-4 bg-gray-200 h-1 rounded-full overflow-hidden mb-6',
+  progressBar: 'h-full bg-blue-500 rounded-full transition-all duration-300',
+  navigationArrows: 'flex justify-between absolute -left-4 -right-4 top-1/2 -translate-y-1/2 z-10',
+  arrowButton: 'w-8 h-8 flex items-center justify-center bg-white shadow-md rounded-full border border-gray-200',
 };
 
 // Icons
@@ -46,38 +45,24 @@ const RightArrow = () => (
   </svg>
 );
 
+const ChevronRight = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.arrowIcon}>
+    <path d="M9 18l6-6-6-6"/>
+  </svg>
+);
+
 const FlashCardsContainer = () => {
-  const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const carouselRef = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
-    hours: 5,
-    minutes: 29,
-    seconds: 57
+    hours: 20,
+    minutes: 23,
+    seconds: 16
   });
   
   // Fetch products data
   const url = `${API_URL}/products?is_pack=true`;
   const { data: products } = useSWR(url);
-  
-  // Update items per page based on screen size
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setItemsPerPage(1);
-      } else if (width < 768) {
-        setItemsPerPage(2);
-      } else if (width < 1280) {
-        setItemsPerPage(3);
-      } else {
-        setItemsPerPage(4);
-      }
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   
   // Countdown timer
   useEffect(() => {
@@ -97,99 +82,109 @@ const FlashCardsContainer = () => {
     return () => clearInterval(timer);
   }, []);
   
-  // Pagination
-  const totalPages = products ? Math.ceil(products.length / itemsPerPage) : 0;
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentProducts = products ? products.slice(startIndex, endIndex) : [];
-  
-  const goToNextPage = () => {
-    if (page < totalPages) {
-      setPage(page + 1);
+  // Scroll functions
+  const handleScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      const progress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setScrollProgress(progress);
     }
   };
   
-  const goToPrevPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: -400,
+        behavior: 'smooth'
+      });
     }
   };
   
-  // Format with leading zero
-  const formatNumber = (num) => num.toString().padStart(2, '0');
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: 400,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener('scroll', handleScroll);
+      return () => carousel.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+  
+  // Format timer display
+  const formatTimeDisplay = () => {
+    const { hours, minutes, seconds } = timeLeft;
+    return `${hours}h : ${minutes}m : ${seconds}s`;
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
         <div className={styles.headerSection}>
-          <div className={styles.flashSaleWrapper}>
+          <h2 className={styles.title}>
             <FlashIcon />
-            <div className={styles.titleContainer}>
-              <h2 className={styles.title}>Flash Sales</h2>
-              <div className={styles.titleLine}></div>
+            Flash Sale
+            <span className={styles.timeLeft}>— Time Left: {formatTimeDisplay()}</span>
+          </h2>
+          
+          <a href="#view-all" className={styles.viewAllLink}>
+            See All
+            <ChevronRight />
+          </a>
+        </div>
+        
+        <div className={styles.progressContainer}>
+          <div 
+            className={styles.progressBar} 
+            style={{ width: `${scrollProgress}%` }}
+          ></div>
+        </div>
+        
+        <div className="relative">
+          <div 
+            className={styles.carouselContainer}
+            ref={carouselRef}
+          >
+            <div className={styles.carouselTrack}>
+              {products ? (
+                products.map((product, index) => (
+                  <FlashCard 
+                    product={product} 
+                    key={product._id || product.id || `product-${index}`} 
+                  />
+                ))
+              ) : (
+                Array(8).fill(0).map((_, index) => (
+                  <FlashCardSkeleton key={`skeleton-${index}`} />
+                ))
+              )}
             </div>
           </div>
           
-          <div className={styles.counterSection}>
-            <div>
-              <div className={styles.timeUnit}>{formatNumber(timeLeft.hours)}</div>
-              <div className={styles.unitLabel}>Hours</div>
-            </div>
-            <div className={styles.timeSeparator}>:</div>
-            <div>
-              <div className={styles.timeUnit}>{formatNumber(timeLeft.minutes)}</div>
-              <div className={styles.unitLabel}>Minutes</div>
-            </div>
-            <div className={styles.timeSeparator}>:</div>
-            <div>
-              <div className={styles.timeUnit}>{formatNumber(timeLeft.seconds)}</div>
-              <div className={styles.unitLabel}>Seconds</div>
-            </div>
-          </div>
-        </div>
-        
-        <div className={styles.productsRow}>
-          {products ? (
-            currentProducts.map((product, index) => (
-              <FlashCard 
-                product={product} 
-                key={product._id || product.id || `product-${index}`} 
-              />
-            ))
-          ) : (
-            Array(itemsPerPage).fill(0).map((_, index) => (
-              <FlashCardSkeleton key={`skeleton-${index}`} />
-            ))
-          )}
-        </div>
-        
-        <button className={styles.viewAllButton}>View All Products</button>
-        
-        {totalPages > 1 && (
-          <div className={styles.navigationContainer}>
+          <div className={styles.navigationArrows}>
             <button 
-              onClick={goToPrevPage}
-              disabled={page === 1}
-              className={`${styles.navButton} ${page === 1 ? styles.navDisabled : ''}`}
-              aria-label="Previous page"
+              onClick={scrollLeft}
+              className={styles.arrowButton}
+              aria-label="Scroll left"
             >
               <LeftArrow />
             </button>
             
-            <span className={styles.pageIndicator}>
-              Page {page} of {totalPages}
-            </span>
-            
             <button 
-              onClick={goToNextPage}
-              disabled={page === totalPages}
-              className={`${styles.navButton} ${page === totalPages ? styles.navDisabled : ''}`}
-              aria-label="Next page"
+              onClick={scrollRight}
+              className={styles.arrowButton}
+              aria-label="Scroll right"
             >
               <RightArrow />
             </button>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -5,25 +5,36 @@ import { toast } from 'react-toastify';
 import { setCartItems } from '../../../store/reducers/dashboard_reducer';
 import AddToCartIcon from '../icons/AddToCartIcon';
 
-const styles = {
-  main: 'flex flex-col justify-between max-w-[14rem] min-w-[10rem] h-[20rem] rounded-3xl bg-white shadow-md p-1 m-1 mb-5',
-  title: 'text-xl text-center font-normal ml-auto mr-auto capitalize',
-  price:
-    'flex items-center text-[#0000009e] text-lg ml-auto mr-auto mt-7 md:mt-4',
-  btnContainer: 'flex justify-between px-3 mt-12 md:mt-5 gap-1',
-  editCount:
-    'cursor-pointer font-semibold text-sm md:text-lg px-2 p-1 border border-yellow-400',
-  count: 'text-white font-semibold text-sm md:text-lg px-2  py-1 bg-green-700',
-  addToCartBtn:
-    'flex items-center justify-between bg-green-700 px-2 py-2 rounded-lg text-white font-semibold text-xs md:text-sm gap-2 w-[3.5rem]',
-};
-
+// Renamed both component and file to match
 const GroceryCard = ({ product }) => {
   const dispatch = useDispatch();
   const [cartQty, setCartQty] = useState(0);
+  const [isAdded, setIsAdded] = useState(false);
+
+  // Safe getter function for product properties
+  const getProductProp = (prop) => {
+    const value = product?.[prop];
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object') return JSON.stringify(value);
+    return value;
+  };
+
+  // Make sure name is a string
+  const nameDisplay = product?.name ? 
+    (typeof product.name === 'string' ? product.name : 
+     (typeof product.name === 'object' && product.name.name ? product.name.name : 'Tech Gadget')) : 'Tech Gadget';
+
+  // Calculate discount percentage
+  const discountPercent = product?.original_price && product?.discount_price 
+    ? Math.round(((product.original_price - product.discount_price) / product.original_price) * 100) 
+    : null;
+
+  // Stock status logic
+  const stockLevel = product?.stock_level || product?.quantity || 10;
+  const stockStatus = stockLevel > 5 ? 'In Stock' : stockLevel > 0 ? 'Low Stock' : 'Out of Stock';
 
   const increaseQty = () => {
-    if (product?.available) {
+    if (stockLevel > 0) {
       setCartQty(cartQty + 1);
     }
   };
@@ -34,60 +45,125 @@ const GroceryCard = ({ product }) => {
   };
 
   const addToCart = () => {
+    if (stockLevel === 0) {
+      toast.error(`${nameDisplay} is currently out of stock`, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+      return;
+    }
+
     const cartData = {
       product_id: product?.id,
-      quantity: cartQty,
+      quantity: cartQty || 1, // Default to 1 if quantity is 0
       price: product?.discount_price,
       slug: product?.slug,
     };
 
-    if (cartQty > 0) {
-      dispatch(setCartItems(cartData));
-      toast.success(`${product?.name} added to cart`, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
-        hideProgressBar: false,
-      });
-    }
+    dispatch(setCartItems(cartData));
+    
+    // Show success animation
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 1000);
+    
+    toast.success(`${nameDisplay} added to cart`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      icon: "🛒",
+    });
+  };
+
+  // Inline styles to avoid potential reference issues
+  const styles = {
+    main: 'flex flex-col justify-between w-full max-w-[15rem] h-[20rem] rounded-lg bg-white shadow-md hover:shadow-xl transition-all duration-300 p-3 m-1 mb-5 relative group overflow-hidden',
+    imageContainer: 'pt-2 px-2 pb-1 flex items-center justify-center h-44 overflow-hidden transition-all duration-300',
+    image: 'object-contain h-full w-full transition-all duration-500 group-hover:scale-105',
+    contentContainer: 'flex flex-col px-1 transition-all duration-300',
+    title: 'text-base font-medium text-gray-800 capitalize line-clamp-2 min-h-[2.5rem] transition-colors duration-300 group-hover:text-blue-700',
+    priceContainer: 'flex items-center mt-2 mb-2',
+    discountPrice: 'text-lg font-bold text-gray-900',
+    originalPrice: 'text-sm text-gray-400 line-through ml-2',
+    btnContainer: 'flex justify-between items-center mt-auto',
+    quantityWrapper: 'flex items-center gap-1',
+    quantityBtn: 'w-8 h-8 flex items-center justify-center text-blue-600 hover:text-blue-800 hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200 rounded-md',
+    quantityDisplay: 'w-8 text-center font-medium text-gray-800 mx-1',
+    addToCartBtn: 'flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md text-white font-medium text-sm gap-2 transition-all duration-200 hover:shadow-md',
+    stockStatus: 'text-xs font-medium text-right mt-1 text-green-600',
   };
 
   return (
-    <div className={styles?.main}>
-      <div className="pt-10 pl-10 pr-10 pb-0 rounded-md max-h-44 overflow-hidden">
-        <img src={`${product?.image}`} alt="grocery" width={150} />
+    <div className={styles.main}>
+      {/* Product image - Fixed to safely handle potentially undefined image sources */}
+      <div className={styles.imageContainer}>
+        {product && product.image ? (
+          <img 
+            src={product.image}
+            alt={nameDisplay || "Tech gadget"} 
+            className={styles.image}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+            No Image
+          </div>
+        )}
       </div>
-      <div className="flex flex-col mb-3">
-        <p className={styles?.title}>
-          {product?.name?.length > 30
-            ? `${product?.name?.slice(0, 29)}...`
-            : `${product?.name}`}
-        </p>
-        <div className={styles?.price}>
-          <span className="line-through">N</span>
-          <span className="">{product?.discount_price}</span>
+
+      {/* Product details */}
+      <div className={styles.contentContainer}>
+        {/* Product name */}
+        <h3 className={styles.title}>
+          {nameDisplay}
+        </h3>
+        
+        {/* Price information */}
+        <div className={styles.priceContainer}>
+          <span className={styles.discountPrice}>₦{getProductProp('discount_price')}</span>
+          {product?.original_price && (
+            <span className={styles.originalPrice}>₦{getProductProp('original_price')}</span>
+          )}
         </div>
-        <div className={styles?.btnContainer}>
-          <div className="flex items-center">
-            <p
-              onClick={reduceQty}
-              className={`${styles?.editCount} rounded-l-lg select-none`}
-            >
-              -
-            </p>
-            <p className={styles?.count}>{cartQty}</p>
-            <p
-              onClick={increaseQty}
-              className={`${styles?.editCount} text-green-700  rounded-r-lg select-none`}
+
+        {/* Stock status indicator */}
+        <div className={styles.stockStatus}>
+          {stockStatus}
+        </div>
+
+        {/* Add to cart controls */}
+        <div className={styles.btnContainer}>
+          <div className={styles.quantityWrapper}>
+            {cartQty > 0 && (
+              <button 
+                onClick={reduceQty} 
+                className={styles.quantityBtn}
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+            )}
+            
+            {cartQty > 0 && (
+              <span className={styles.quantityDisplay}>{cartQty}</span>
+            )}
+            
+            <button 
+              onClick={increaseQty} 
+              className={styles.quantityBtn}
+              aria-label="Increase quantity"
+              disabled={stockLevel === 0}
             >
               +
-            </p>
+            </button>
           </div>
 
-          <button onClick={addToCart} className={styles?.addToCartBtn}>
-            <div className="inline-block mx-auto">
-              <AddToCartIcon />
-            </div>
-            {/* <p>Add to cart</p> */}
+          <button 
+            onClick={addToCart} 
+            className={styles.addToCartBtn}
+            disabled={stockLevel === 0}
+            aria-label="Add to cart"
+          >
+            <AddToCartIcon />
+            {cartQty > 0 && <span>Add</span>}
           </button>
         </div>
       </div>

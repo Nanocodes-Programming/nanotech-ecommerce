@@ -31,14 +31,19 @@ const MainProduct = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row items-start w-[90vw] md:w-[83vw] mx-auto gap-10">
-        <div className="w-full lg:w-[15rem] mt-1 flex flex-row lg:flex-col items-center gap-2 max-h-[25rem] overflow-scroll no-scrollbar">
+        {/* Categories sidebar - removed overflow and made it neat */}
+        <div className="w-full lg:w-[15rem] mt-1 flex flex-row lg:flex-col items-center gap-2">
           <div
             onClick={() => setProdCat('all')}
-            className="w-full h-14 flex items-center px-2 gap-2 bg-white shadow-md rounded-md cursor-pointer min-w-[12rem] m-1"
+            className={`w-full h-14 flex items-center px-3 gap-2 rounded-md cursor-pointer min-w-[12rem] transition-all duration-200 ${
+              prodCat === 'all' 
+                ? 'bg-white shadow-md border-l-2 border-[#FFB800]' 
+                : 'bg-white shadow hover:shadow-md'
+            }`}
           >
             <img
-              src={groceryImg}
-              alt="onics"
+              src={groceryImg.src}
+              alt="all gadgets"
               width={30}
               className="object-cover"
             />
@@ -50,10 +55,12 @@ const MainProduct = () => {
                   : 'font-semibold text-gray-800'
               }
             >
-              All products
+              All gadgets
             </p>
           </div>
-          {categories?.map((category) => (
+          
+          {/* Limit number of visible categories if needed */}
+          {categories?.slice(0, 8).map((category) => (
             <NewCategoryCard
               key={category.id || category._id || category.slug || `category-${Math.random()}`}
               category={category}
@@ -61,8 +68,16 @@ const MainProduct = () => {
               prodCat={prodCat}
             />
           ))}
+          
+          {/* Optional "View More" button if categories exceed 8 */}
+          {categories && categories.length > 8 && (
+            <div className="w-full text-center py-2 text-blue-600 hover:text-blue-800 cursor-pointer font-medium">
+              View more
+            </div>
+          )}
         </div>
 
+        {/* Products section */}
         <ProductsSection prodCat={prodCat} />
       </div>
     </div>

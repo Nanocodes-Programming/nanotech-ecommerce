@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import onics_logo from '../../../images/onicss.png';
+import onics_logo from '../../../images/NANOTECH_022535.svg';
 import { customLogoutUser } from '../../../store/actions/auth_actions';
 import { setAuthModal } from '../../../store/reducers/auth_reducer';
 import { setDashboardPage } from '../../../store/reducers/dashboard_reducer';
@@ -67,8 +67,18 @@ const MobileSideDrawer = ({ openDrawer }) => {
 
   return (
     <div className="relative">
-      <Drawer anchor="left" open={openDrawer} onClose={handleDrawerClose}>
-        <div className="flex flex-col lg:hidden h-full justify-between w-[100%] pl-5  pb-5 pt-4 text-gray-700 overflow-x-hidden">
+      <Drawer 
+        anchor="left" 
+        open={openDrawer} 
+        onClose={handleDrawerClose}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#006400', // Dark green background
+            color: 'white'
+          }
+        }}
+      >
+        <div className="flex flex-col lg:hidden h-full justify-between w-[100%] pl-5 pb-5 pt-4 overflow-x-hidden text-white">
           <div className="pr-28">
             <img src={onics_logo.src} alt="" className="h-16" />
             <div className="flex flex-col gap-3 mt-5 ">
@@ -77,7 +87,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className="flex items-center gap-6 cursor-pointer"
+                className="flex items-center gap-6 cursor-pointer hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -95,7 +105,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/about');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className="flex items-center gap-6"
+                className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -113,7 +123,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/contact');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className={'flex items-center gap-6 mb-5'}
+                className="flex items-center gap-6 mb-5 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -127,7 +137,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
               </div>
             </div>
             {authenticated && (
-              <div className="w-[92%] absolute h-[1.5px] bg-gray-100" />
+              <div className="w-[92%] absolute h-[1.5px] bg-green-700" />
             )}
 
             {authenticated && (
@@ -138,7 +148,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -157,7 +167,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -176,7 +186,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -189,7 +199,10 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   </p>
                 </div>
 
-                <div onClick={logOut} className="flex items-center gap-6 mb-2">
+                <div 
+                  onClick={logOut} 
+                  className="flex items-center gap-6 mb-2 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                >
                   <p className="text-lg">Log out</p>
                 </div>
               </div>
@@ -200,7 +213,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
             <div className="mb-2 w-full ml-5">
               <button
                 onClick={handleOrder}
-                className="px-5 py-3 bg-[#FFB800] border-none outline-none rounded-lg font-semibold"
+                className="px-5 py-3 bg-[#FFB800] border-none outline-none rounded-lg font-semibold text-green-900 hover:bg-yellow-400 transition-colors"
               >
                 Start a new order
               </button>
@@ -211,7 +224,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
             <div>
               <div className="mb-2 w-full ml-5">
                 <button
-                  className="bg-transparent text-green-600 w-[10rem] font-bold items-center border rounded-xl border-green-600 outline-none  py-3"
+                  className="bg-transparent text-white w-[10rem] font-bold items-center border rounded-xl border-white outline-none py-3 hover:bg-green-700 transition-colors"
                   onClick={setLogin}
                 >
                   Log in
@@ -219,7 +232,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
               </div>
               <div className="mb-2 w-full ml-5">
                 <button
-                  className="bg-green-600 text-white w-[10rem] font-bold items-center border rounded-xl border-green-600 py-3"
+                  className="bg-[#FFB800] text-green-900 w-[10rem] font-bold items-center border rounded-xl border-[#FFB800] py-3 hover:bg-yellow-400 transition-colors"
                   onClick={setSignup}
                 >
                   Register

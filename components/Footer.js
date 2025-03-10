@@ -100,7 +100,7 @@ const Footer = () => {
           className="cursor-pointer"
         >
           <Image 
-            src="/images/onicss.png" 
+            src="/images/NANOTECH_022535.svg" 
             alt="Onics Logo" 
             width={64} 
             height={64} 

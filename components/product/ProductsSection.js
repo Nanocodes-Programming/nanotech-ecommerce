@@ -200,7 +200,7 @@ const ProductsSection = ({ initialCategory = 'all' }) => {
         {visibleProducts.map((product) => (
           <GroceryCard 
             product={product} 
-            key={product.id || product._id || `product-${Math.random()}`} 
+            key={product.id || product._id || `product-${Math.random()}`}
           />
         ))}
         

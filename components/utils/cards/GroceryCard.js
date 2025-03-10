@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setCartItems } from '../../../store/reducers/dashboard_reducer';
+import { setProductDetails } from '../../../store/reducers/main_reducer';
+import { setAuthModal } from '../../../store/reducers/auth_reducer';
 import AddToCartIcon from '../icons/AddToCartIcon';
-import Link from 'next/link';
 
 const GroceryCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -39,9 +40,6 @@ const GroceryCard = ({ product }) => {
     stockLevel > 5 ? 'text-green-600' : 
     stockLevel > 0 ? 'text-yellow-600' : 
     'text-red-600';
-
-  // Create product URL
-  const productUrl = `/products/${product?.slug || product?.id || ''}`;
 
   const increaseQty = () => {
     if (stockLevel > 0) {
@@ -92,6 +90,14 @@ const GroceryCard = ({ product }) => {
     }
   }, [isAdded]);
 
+  // Handle showing product details in existing modal
+  const handleShowDetails = () => {
+    // Set the product details in the Redux store
+    dispatch(setProductDetails(product));
+    // Open the existing product details modal
+    dispatch(setAuthModal('PRODUCT_DETAILS'));
+  };
+
   return (
     <div 
       className={`flex flex-col justify-between w-full max-w-[15rem] h-[22rem] rounded-xl bg-white overflow-hidden relative group ${
@@ -110,19 +116,22 @@ const GroceryCard = ({ product }) => {
       )}
       
       {/* View Details Button */}
-      <Link 
-        href={productUrl}
+      <button 
+        onClick={handleShowDetails}
         className={`absolute inset-x-0 top-1/3 flex justify-center z-10 transition-opacity duration-300 ${
           isHovering ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <span className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-800 shadow-md">
+        <span className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-800 shadow-md hover:bg-white/90">
           View Details
         </span>
-      </Link>
+      </button>
 
       {/* Product image with zoom effect - LARGER */}
-      <Link href={productUrl} className="block relative overflow-hidden h-60 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div 
+        className="block relative overflow-hidden h-60 bg-gradient-to-br from-gray-50 to-gray-100 cursor-pointer"
+        onClick={handleShowDetails}
+      >
         {product && product.image ? (
           <div className="h-full w-full flex items-center justify-center">
             <img 
@@ -143,18 +152,18 @@ const GroceryCard = ({ product }) => {
         <div className={`absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-1000 ${
           isHovering ? 'translate-x-full' : '-translate-x-full'
         }`}></div>
-      </Link>
+      </div>
 
       {/* Product details - SMALLER */}
       <div className="flex flex-col p-3 flex-grow">
         {/* Product name */}
-        <Link href={productUrl}>
+        <button onClick={handleShowDetails} className="text-left">
           <h3 className={`text-sm font-medium capitalize line-clamp-1 transition-colors duration-300 ${
             isHovering ? 'text-blue-700' : 'text-gray-800'
           }`}>
             {nameDisplay}
           </h3>
-        </Link>
+        </button>
         
         {/* Price information */}
         <div className="flex items-center mt-1 mb-1">

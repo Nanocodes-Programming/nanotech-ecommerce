@@ -6,7 +6,7 @@ import ProductsSection from './ProductsSection';
 
 const MainProduct = () => {
   return (
-    <div className="flex flex-col mb-[12rem] gap-5">
+    <div className="flex flex-col mb-[12rem] gap-5 max-w-7xl mx-auto relative">
       <div className="absolute right-0 -z-10">
         <img src={fresh.src} alt="" width={300} />
       </div>
@@ -21,7 +21,7 @@ const MainProduct = () => {
         <MobileSearchBar />
       </div>
 
-      <div className="w-[90vw] md:w-[83vw] mx-auto">
+      <div className="w-[90vw] md:w-[83vw] max-w-7xl  mx-auto">
         {/* Products section with integrated horizontal category filters */}
         <ProductsSection />
       </div>

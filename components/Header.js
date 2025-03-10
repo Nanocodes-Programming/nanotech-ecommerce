@@ -31,6 +31,7 @@ const styles = {
     'bg-white text-green-600 font-bold items-center border rounded-xl border-white outline-none px-6 py-2',
 };
 
+
 const Header = () => {
   useAuth();
   const dispatch = useDispatch();

@@ -1,7 +1,6 @@
 'use client'
 import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
@@ -18,19 +17,6 @@ import SearchIcon from './utils/icons/SearchIcon';
 import MobileSearchBar from './utils/reusables/MobileSearchBar';
 import MobileSideDrawer from './utils/reusables/MobileSideDrawer';
 
-const styles = {
-  main: 'flex justify-between lg:justify-evenly items-center bg-transparent relative pt-4 pb-1 md:pt-5 md:pb-5 pr-3',
-  search:
-    'hidden flex-1 bg-white md:flex justify-between items-center border rounded-lg border-amber-400 p-2 h-9 xl:max-w-lg mx-0 md:mx-16 xl:mx-36',
-  searchInput: 'flex-1 border-none outline-none',
-  textContainer: 'hidden lg:flex justify-between md:items-center md:z-auto',
-  headerText: 'font-semibold text-lg mr-6 cursor-pointer',
-  loginBtn:
-    'bg-transparent text-white font-bold items-center border rounded-xl border-white px-6 py-2 mr-4',
-  signupBtn:
-    'bg-white text-green-600 font-bold items-center border rounded-xl border-white px-6 py-2',
-};
-
 const DashboardHeader = () => {
   useAuth();
   const dispatch = useDispatch();
@@ -40,6 +26,10 @@ const DashboardHeader = () => {
   const authenticated = useSelector((state) => state.auth.authenticated);
   const mobileSearch = useSelector((state) => state.main.mobileSearch);
   const mobileSideDrawer = useSelector((state) => state.main.mobileSideDrawer);
+  const cartItems = useSelector((state) => state.dashboard.cartItems || []);
+  
+  // Calculate total number of items in cart
+  const cartItemCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const setLogin = () => {
     dispatch(setAuthModal('LOGIN'));
@@ -58,93 +48,123 @@ const DashboardHeader = () => {
   };
 
   return (
-    <nav className={styles.main}>
+    <nav className="flex justify-between lg:justify-evenly items-center bg-white py-4 px-4 shadow-sm relative z-10">
+      {/* Mobile Logo */}
       <div
         onClick={homeNavigate}
-        className="inline-block md:hidden cursor-pointer ml-2"
+        className="inline-block md:hidden cursor-pointer"
       >
-        <img src={onics_logo.src} alt="" className="h-16" />
+        <img src={onics_logo.src} alt="Logo" className="h-12" />
       </div>
-      {/* <div className={styles.search}>
-        <input placeholder="Search" className={styles.searchInput} />
-        <SearchIcon height={15} width={20} />
-      </div> */}
+      
+      {/* Search Bar - Desktop */}
       <div className="mr-auto ml-auto hidden md:flex md:z-auto">
         <AutoSearch />
       </div>
-      <div className="lg:hidden flex items-center gap-3">
+      
+      {/* Mobile Navigation */}
+      <div className="lg:hidden flex items-center gap-4">
+        {/* Search Icon - Mobile */}
         <div
           onClick={() => dispatch(setMobileSearch(!mobileSearch))}
-          className="block md:hidden"
+          className="block md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
         >
-          <SearchIcon height={25} width={30} />
+          <SearchIcon height={22} width={22} />
         </div>
-        <div onClick={() => router.push('/cart')}>
-          <CartIcon color={'#6b7280cc'} />
+        
+        {/* Cart Icon - Mobile */}
+        <div 
+          onClick={() => router.push('/cart')}
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <CartIcon color={'#4B5563'} itemCount={cartItemCount} />
         </div>
+        
+        {/* Mobile Search Bar - Conditional */}
         {mobileSearch && (
-          <div className="absolute -bottom-8 left-4">
+          <div className="absolute -bottom-8 left-0 right-0 px-4">
             <MobileSearchBar />
           </div>
         )}
 
-        {/* NavIcon */}
+        {/* Avatar/Menu Icon - Mobile */}
         {authenticated ? (
           <div className="cursor-pointer relative">
-            <div onClick={showSidedrawer}>
-              <Avatar src="" alt="" />
+            <div onClick={showSidedrawer} className="p-1">
+              <Avatar src="" alt="" sx={{ width: 36, height: 36 }} />
             </div>
             <MobileSideDrawer openDrawer={mobileSideDrawer} />
           </div>
         ) : (
-          <NavbarIcon />
+          <div 
+            onClick={showSidedrawer}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <NavbarIcon />
+          </div>
         )}
       </div>
-      <div className={styles.textContainer}>
+      
+      {/* Desktop Navigation */}
+      <div className="hidden lg:flex items-center space-x-8">
+        {/* Navigation Links */}
         <h4
           onClick={() => router.push('/')}
-          className={`${styles.headerText} text-gray-500`}
+          className="font-medium text-gray-600 hover:text-gray-900 cursor-pointer transition-colors"
         >
           Home
         </h4>
         <h4
           onClick={() => router.push('/about')}
-          className={`${styles.headerText} text-gray-500`}
+          className="font-medium text-gray-600 hover:text-gray-900 cursor-pointer transition-colors"
         >
           About
         </h4>
         <h4
           onClick={() => router.push('/contact')}
-          className={`${styles.headerText} text-gray-500`}
+          className="font-medium text-gray-600 hover:text-gray-900 cursor-pointer transition-colors"
         >
           Contact
         </h4>
-        <div onClick={() => router.push('/cart')} className="mr-8 cursor-pointer">
-          <CartIcon color={'#6b7280cc'} />
+        
+        {/* Cart - Desktop */}
+        <div 
+          onClick={() => router.push('/cart')} 
+          className="cursor-pointer"
+        >
+          <CartIcon color={'#4B5563'} itemCount={cartItemCount} />
         </div>
-        <div className="flex justify-between items-center gap-2">
+        
+        {/* User Section - Desktop */}
+        <div className="flex items-center space-x-4">
           {user?.first_name && (
-            <p>{`${user?.first_name} ${user?.first_name}`}</p>
+            <p className="font-medium text-gray-700">
+              {`${user?.first_name} ${user?.last_name || user?.first_name}`}
+            </p>
           )}
 
           {authenticated && (
-            <div className="cursor-pointer relative lg:mr-3 xl:mr-5">
-              <div>
-                <Avatar src="" alt="" />
-              </div>
+            <div className="cursor-pointer relative">
+              <Avatar src="" alt="" sx={{ width: 40, height: 40 }} />
             </div>
           )}
-        </div>
-        <div className={styles.textContainer}>
+          
+          {/* Auth Buttons - Desktop */}
           {!authenticated && (
-            <button className={styles.loginBtn} onClick={setLogin}>
-              Log in
-            </button>
-          )}
-          {!authenticated && (
-            <button className={styles.signupBtn} onClick={setSignup}>
-              Register
-            </button>
+            <div className="flex items-center space-x-3">
+              <button 
+                className="bg-transparent text-gray-800 font-medium border border-gray-300 rounded-lg px-5 py-2 hover:bg-gray-50 transition-colors" 
+                onClick={setLogin}
+              >
+                Log in
+              </button>
+              <button 
+                className="bg-blue-600 text-white font-medium border border-blue-600 rounded-lg px-5 py-2 hover:bg-blue-700 transition-colors" 
+                onClick={setSignup}
+              >
+                Register
+              </button>
+            </div>
           )}
         </div>
       </div>

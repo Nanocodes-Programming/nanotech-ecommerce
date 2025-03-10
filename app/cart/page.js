@@ -14,11 +14,19 @@ import NoCart from '@/components/utils/icons/NoCart';
 const CartPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.dashboard.cartItems);
+  const cartItems = useSelector((state) => state.dashboard.cartItems || []);
   const authenticated = useSelector((state) => state.auth.authenticated);
 
   const url = `${API_URL}/products/`;
   const { data: products } = useSWR(url);
+
+  // Calculate subtotal
+  const subtotal = calculateTotalPrice(cartItems, products);
+  
+  // Format price with commas
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   const handleOrderPage = () => {
     if (authenticated && cartItems?.length) {
@@ -36,50 +44,99 @@ const CartPage = () => {
     }
   };
 
+  const continueShopping = () => {
+    router.push('/');
+  };
+
   return (
-    <div className="min-h-[90vh]">
+    <div className="min-h-screen bg-gray-50">
       <div className="bg-gradient-to-br from-green-800 via-green-500 to-green-600 shadow-md px-3 xl:px-32">
         <Header />
       </div>
-      <div className="flex flex-col md:flex-row justify-between px-4 xl:px-40 md:gap-10 lg:gap-20">
-        <div className="flex-1 w-full mt-5 shadow-md rounded-md p-2">
-          <p className="font-semibold text-lg text-[#0000009e]">{`Cart (${cartItems?.length})`}</p>
-          {cartItems?.map((cartItem) => (
-            <CartCard cartItem={cartItem} />
-          ))}
-
-          {cartItems?.length === 0 && (
-            <div className="flex justify-center -mt-28">
-              <NoCart />
-            </div>
-          )}
-        </div>
-        <div className="w-full md:w-64 h-48 mr-auto ml-auto bg-white rounded-md shadow-md px-2 mt-5">
-          <div className="border-b">
-            <div className="flex items-center justify-between mt-2 mb-2 pt-3">
-              <p className="text-[#0000009e]">Subtotal</p>
-              <div className="flex items-center text-[#0000009e] font-semibold text-lg gap-[1px]">
-                <p className="line-through">N</p>
-                <p className="text-lg">
-                  {calculateTotalPrice(cartItems, products)}
-                </p>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+        
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Cart Items Section */}
+          <div className="flex-1">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="border-b border-gray-200 px-6 py-4">
+                <h2 className="text-lg font-medium text-gray-900">
+                  Cart Items ({cartItems?.length || 0})
+                </h2>
+              </div>
+              
+              <div className="divide-y divide-gray-200">
+                {cartItems && cartItems.length > 0 ? (
+                  cartItems.map((cartItem, index) => (
+                    <div key={`${cartItem.product_id}-${index}`} className="px-6 py-4">
+                      <CartCard cartItem={cartItem} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-16">
+                    <div className="mb-4">
+                      <NoCart />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
+                    <p className="text-gray-500 mb-6">Looks like you haven't added any products to your cart yet.</p>
+                    <button 
+                      onClick={continueShopping}
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition-colors"
+                    >
+                      Continue Shopping
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
-            <div className="flex items-center justify-between">
-              <p className="text-[#0000009e] mb-3">Order below</p>
-              {/* <p className="mb-2 text-[#0000009e] font-semibold text-lg">---</p> */}
-            </div>
           </div>
-          <p className="my-2 text-[#0000009e]">
-            Delivery fees are not included yet
-          </p>
-          <div className="w-full flex items-center mb-2">
-            <button
-              onClick={handleOrderPage}
-              className="bg-[#FFB800] w-full text-white font-semibold py-2 px-4 rounded-lg"
-            >
-              Order
-            </button>
+          
+          {/* Order Summary Section */}
+          <div className="w-full lg:w-80">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
+              <h2 className="text-lg font-medium text-gray-900 mb-6">Order Summary</h2>
+              
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="text-gray-900 font-medium">₦{formatPrice(subtotal)}</span>
+                </div>
+                
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Shipping</span>
+                  <span className="text-gray-500 italic">Calculated at checkout</span>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-4 mt-4">
+                  <div className="flex justify-between">
+                    <span className="text-lg font-medium text-gray-900">Total</span>
+                    <span className="text-lg font-bold text-gray-900">₦{formatPrice(subtotal)}</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-1">Delivery fees will be calculated at checkout</p>
+                </div>
+              </div>
+              
+              <button
+                onClick={handleOrderPage}
+                disabled={cartItems?.length === 0}
+                className={`w-full mt-6 py-3 px-4 rounded-md font-medium text-white transition-colors ${
+                  cartItems?.length === 0 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-[#FFB800] hover:bg-[#e6a600]'
+                }`}
+              >
+                Proceed to Checkout
+              </button>
+              
+              <button
+                onClick={continueShopping}
+                className="w-full mt-3 py-3 px-4 rounded-md font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
+              >
+                Continue Shopping
+              </button>
+            </div>
           </div>
         </div>
       </div>

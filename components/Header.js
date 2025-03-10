@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
-// import onics_logo from '../images/onicss.png';
 import onics_logo from '@/images/NANOTECH_022535.svg';
 import { setAuthModal } from '../store/reducers/auth_reducer';
 import {
@@ -42,6 +41,12 @@ const Header = () => {
   const mobileSearch = useSelector((state) => state.main.mobileSearch);
   const mobileSideDrawer = useSelector((state) => state.main.mobileSideDrawer);
   const authModal = useSelector((state) => state.auth.authModal);
+  
+  // Get cart items from Redux store
+  const cartItems = useSelector((state) => state.dashboard.cartItems || []);
+  
+  // Calculate total number of items in cart
+  const cartItemCount = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const setLogin = () => {
     dispatch(setAuthModal('LOGIN'));
@@ -62,16 +67,13 @@ const Header = () => {
   return (
     <nav className={styles.main}>
       <div onClick={homeNavigate} className="cursor-pointer">
-        {/* <OnicsIcon /> */}
         <img src={onics_logo.src} alt="" className="h-16" />
       </div>
-      {/* <div className={styles.search}>
-        <input placeholder="Search" className={styles.searchInput} />
-        <SearchIcon height={15} width={20} />
-      </div> */}
+      
       <div className="mr-auto ml-auto hidden md:flex md:z-auto">
         <AutoSearch />
       </div>
+      
       <div className="lg:hidden flex items-center gap-3">
         <div
           onClick={() => dispatch(setMobileSearch(!mobileSearch))}
@@ -79,22 +81,26 @@ const Header = () => {
         >
           <SearchIcon height={25} width={30} color={'#FFF'} />
         </div>
+        
         {mobileSearch && (
           <div className="absolute -bottom-4 left-0">
             <MobileSearchBar />
           </div>
         )}
+        
         <div
           onClick={() => {
             router.push('/cart');
           }}
+          className="relative"
         >
           {window.location?.pathname === '/cart' ? (
-            <CartIcon color={'#FFB800'} />
+            <CartIcon color={'#FFB800'} itemCount={cartItemCount} />
           ) : (
-            <CartIcon />
+            <CartIcon itemCount={cartItemCount} />
           )}
         </div>
+        
         {/* NavIcon */}
         {authenticated ? (
           <div className="cursor-pointer relative">
@@ -113,6 +119,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      
       <div className={styles.textContainer}>
         <h4
           onClick={() => {
@@ -126,6 +133,7 @@ const Header = () => {
         >
           Order a bike
         </h4>
+        
         <h4
           onClick={() => router.push('/about')}
           className={
@@ -136,6 +144,7 @@ const Header = () => {
         >
           About
         </h4>
+        
         <h4
           onClick={() => router.push('/contact')}
           className={
@@ -146,6 +155,7 @@ const Header = () => {
         >
           Contact
         </h4>
+        
         {authenticated && (
           <h4
             onClick={() => router.push('/dashboard')}
@@ -158,21 +168,23 @@ const Header = () => {
             Dashboard
           </h4>
         )}
+        
         <div
           onClick={() => {
             router.push('/cart');
           }}
-          className="mr-8 cursor-pointer"
+          className="mr-8 cursor-pointer relative"
         >
           {window.location?.pathname === '/cart' ? (
-            <CartIcon color={'#FFB800'} />
+            <CartIcon color={'#FFB800'} itemCount={cartItemCount} />
           ) : (
-            <CartIcon />
+            <CartIcon itemCount={cartItemCount} />
           )}
         </div>
+        
         <div className="flex justify-between items-center gap-2">
           {user?.first_name && (
-            <p>{`${user?.first_name} ${user?.first_name}`}</p>
+            <p className="text-white">{`${user?.first_name} ${user?.last_name || ''}`}</p>
           )}
 
           {authenticated && (
@@ -183,6 +195,7 @@ const Header = () => {
             </div>
           )}
         </div>
+        
         <div className={styles.textContainer}>
           {!authenticated && (
             <button className={styles.loginBtn} onClick={setLogin}>

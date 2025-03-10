@@ -63,7 +63,7 @@ const CartCard = ({ cartItem }) => {
         <div className="flex items-center justify-between">
           <div className="flex justify-start gap-2">
             <div className="h-12 w-12 overflow-hidden">
-              <img src={`${itemDetails?.image.src}`} alt="cart" />
+              <img src={`${itemDetails?.image}`} alt="cart" />
             </div>
             <div>
               <p className="text-[#0000009e] text-base md:text-lg capitalize">

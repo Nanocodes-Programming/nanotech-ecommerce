@@ -63,6 +63,7 @@ const FlashCardsContainer = () => {
   // Fetch products data
   const url = `${API_URL}/products?is_pack=true`;
   const { data: products } = useSWR(url);
+  console.log(products, 'antojer')
   
   // Countdown timer
   useEffect(() => {

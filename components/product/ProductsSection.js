@@ -3,10 +3,10 @@ import useSWR from 'swr';
 import { API_URL } from '../../constants/api';
 import GroceryCard from '../utils/cards/GroceryCard';
 import GroceryCardSkeleton from '../utils/skeletons/GroceryCardSkeleton';
-import CategoryFilter from '../CategoryFilter';// Update with correct path
 
-const ProductsSection = ({ initialCategory = 'all' }) => {
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
+// No longer importing CategoryFilter since it's moved to Banner
+
+const ProductsSection = ({ category = 'all' }) => {
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -14,9 +14,9 @@ const ProductsSection = ({ initialCategory = 'all' }) => {
   const containerRef = useRef(null);
   
   // Keep the original URL structure for products - ensure we're using slug for category filtering
-  const productsUrl = activeCategory === 'all'
+  const productsUrl = category === 'all'
     ? `${API_URL}/products/`
-    : `${API_URL}/category/${activeCategory}`;
+    : `${API_URL}/category/${category}`;
     
   const { data: products, error } = useSWR(productsUrl);
 
@@ -25,7 +25,7 @@ const ProductsSection = ({ initialCategory = 'all' }) => {
     setVisibleProducts([]);
     setPage(1);
     setHasMore(true);
-  }, [activeCategory]);
+  }, [category]);
 
   // Load initial products when data is available
   useEffect(() => {
@@ -79,24 +79,13 @@ const ProductsSection = ({ initialCategory = 'all' }) => {
     };
   }, [handleScroll]);
 
-  // Handle category change
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-  };
-
   return (
     <div className="w-full">
-      {/* Category Filter Component */}
-      <CategoryFilter 
-        activeCategory={activeCategory}
-        onCategoryChange={handleCategoryChange}
-      />
-
       {/* Category title and product count */}
       {products && products.length > 0 && (
         <div className="mb-6 px-1">
           <h2 className="text-xl font-semibold text-gray-800 capitalize">
-            {activeCategory === 'all' ? 'All Products' : activeCategory.replace(/-/g, ' ')}
+            {category === 'all' ? 'All Products' : category.replace(/-/g, ' ')}
             <span className="ml-2 text-sm text-gray-500">
               ({products.length})
             </span>

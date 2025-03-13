@@ -7,37 +7,17 @@ import headset from '@/images/headset.webp';
 import mouse from '@/images/mouse.webp';
 import keyboard from '@/images/keyboard.webp';
 import girlyheady from '@/images/girlyheady.png';
+import { API_URL } from '@/constants/api';
+import useSWR from 'swr';
 
-// Category images - replace with your actual images
-const categoryImages = {
-  smartphone: '/api/placeholder/60/60?text=Phone',
-  laptops: '/api/placeholder/60/60?text=Laptop',
-  headphones: '/api/placeholder/60/60?text=Headphones',
-  electronics: '/api/placeholder/60/60?text=Electronics',
-  games: '/api/placeholder/60/60?text=Games',
-  washing: '/api/placeholder/60/60?text=Washing',
-  vacuum: '/api/placeholder/60/60?text=Vacuum',
-  camera: '/api/placeholder/60/60?text=Camera',
-};
 
-// Categories data with images
-const categories = [
-  { id: 'smartphone', name: 'Smartphone', image: categoryImages.smartphone },
-  { id: 'laptops', name: 'Laptops & MacBook', image: categoryImages.laptops },
-  { id: 'headphones', name: 'Headphones', image: categoryImages.headphones },
-  { id: 'electronics', name: 'Electronics', image: categoryImages.electronics },
-  { id: 'games', name: 'Games & Controls', image: categoryImages.games },
-  { id: 'washing', name: 'Washing Machine', image: categoryImages.washing },
-  { id: 'vacuum', name: 'Vacuum', image: categoryImages.vacuum },
-  { id: 'camera', name: 'Camera', image: categoryImages.camera },
-];
-
-const Banner = () => {
+const Banner = ({onCategoryChange}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('laptops'); // Default to laptops as shown in the image
-  
-  // Slide content with different images for each slide
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const categoriesUrl = `${API_URL}/category/`;
+  const { data: categories, error } = useSWR(categoriesUrl);
   const slides = [
     {
       id: 0,
@@ -98,9 +78,12 @@ const Banner = () => {
     }
   };
 
-  const handleCategoryChange = (category) => {
+  const handleCategorySelection = (category) => {
     setActiveCategory(category);
-    // Additional logic for category change can go here
+    // Pass the selected category to the parent component (which will handle filtering products)
+    if (onCategoryChange) {
+      onCategoryChange(category);
+    }
     console.log(`Category changed to: ${category}`);
   };
 
@@ -370,9 +353,8 @@ const Banner = () => {
       {/* Categories section styled like the image */}
       <div className="mx-auto max-w-6xl">
         <CategoryFilter 
-          categories={categories} 
           activeCategory={activeCategory} 
-          onCategoryChange={handleCategoryChange} 
+          onCategoryChange={handleCategorySelection} 
         />
       </div>
     </div>

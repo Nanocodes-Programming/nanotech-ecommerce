@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -9,7 +9,7 @@ import Why from '../components/Why';
 import FlashSales from '../components/flash-sales/FlashSales';
 import MainProduct from '../components/product/MainProduct';
 import { customLogoutUser } from '../store/actions/auth_actions';
-import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
+// import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
 
 
 export default function Home() {
@@ -37,12 +37,19 @@ export default function Home() {
     }
   }, [dispatch, router]);
 
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // This function will be passed to Banner component
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div>
-      <Banner />
+      <Banner onCategoryChange={handleCategoryChange}/>
       {/* <PromotionalBannerCarousel /> */}
       <FlashSales />
-      <MainProduct />
+      <MainProduct category={selectedCategory} />
       <MobileDownloadSection />
     </div>
   );

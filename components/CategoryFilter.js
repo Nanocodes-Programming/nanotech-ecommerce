@@ -10,7 +10,13 @@ const CategoryFilter = ({
   
   // Fetch categories from API
   const categoriesUrl = `${API_URL}/category/`;
-  const { data: categories, error } = useSWR(categoriesUrl);
+  const { data: fetchedCategories, error } = useSWR(categoriesUrl);
+  
+  // Add "All" category to the list of categories from API
+  const categories = fetchedCategories ? [
+    { id: 'all', slug: 'all', name: 'All', image: '/images/categories/all.png' },
+    ...fetchedCategories
+  ] : null;
   
   // Scroll category into view when selected
   useEffect(() => {
@@ -43,12 +49,6 @@ const CategoryFilter = ({
     if (categoryScrollRef.current) {
       categoryScrollRef.current.scrollBy({ left: -200, behavior: 'smooth' });
     }
-  };
-
-  // Get image from the API-provided category data
-  const getCategoryIcon = (category) => {
-    // Directly use the image from the API
-    return category.image || null;
   };
 
   return (

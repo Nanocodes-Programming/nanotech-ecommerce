@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <PromotionalBannerCarousel />
+      {/* <PromotionalBannerCarousel /> */}
       <FlashSales />
       <MainProduct />
       <MobileDownloadSection />

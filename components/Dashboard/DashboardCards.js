@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 import useSWR from 'swr';
 import { API_URL } from '../../constants/api';
-import FlashCard from '../utils/cards/FlashCard';
+import FlashCard from '../utils/cards/CleanProductCard';
 import FlashCardSkeleton from '../utils/skeletons/FlashCardSkeleton';
 
 const fetcher = async (url, authDetails) => {

@@ -1,6 +1,6 @@
 // app/category/[slug]/page.js
 import Header from '../../../components/Header';
-import FlashCard from '../../../components/utils/cards/FlashCard';
+import FlashCard from '../../../components/utils/cards/CleanProductCard';
 import { API_URL } from '../../../constants/api';
 
 async function getCategoryProducts(slug) {

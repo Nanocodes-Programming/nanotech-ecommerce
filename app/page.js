@@ -9,7 +9,6 @@ import Why from '../components/Why';
 import FlashSales from '../components/flash-sales/FlashSales';
 import MainProduct from '../components/product/MainProduct';
 import { customLogoutUser } from '../store/actions/auth_actions';
-// import PromotionalBannerCarousel from '@/components/PromotionalBannerCarousel';
 
 
 export default function Home() {
@@ -49,6 +48,7 @@ export default function Home() {
       <Banner onCategoryChange={handleCategoryChange}/>
       {/* <PromotionalBannerCarousel /> */}
       <FlashSales />
+  
       <MainProduct category={selectedCategory} />
       <MobileDownloadSection />
     </div>

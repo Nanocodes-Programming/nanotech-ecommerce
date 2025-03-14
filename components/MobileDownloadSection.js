@@ -2,6 +2,7 @@ import { useState } from 'react';
 import mobileGreenSvg from './utils/svgs/mobile-green-bg.svg';
 import mobilePinkSvg from './utils/svgs/mobile-pink-bg.svg';
 import mobileSvg from './utils/svgs/mobile.svg';
+import img from '@/images/img-1-9.webp'
 
 const styles = {
   main: 'flex flex-col justify-between -mt-44 md:mt-0 mb-24',
@@ -48,7 +49,7 @@ const NewsletterSection = () => {
         <div className={styles.svgWrapper}>
           <img src={mobileGreenSvg.src} alt="" />
           <img src={mobilePinkSvg.src} alt="" className={styles.pinkSvg} />
-          {/* <img src={mobileSvg.src} alt="" className={styles.contentSvg} /> */}
+          <img src={img.src} alt="" className={styles.contentSvg} />
         </div>
         <div className={styles.contentWrapper}>
           <h2 className="font-bold text-3xl lg:text-5xl pb-7">

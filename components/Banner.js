@@ -10,7 +10,6 @@ import girlyheady from '@/images/girlyheady.png';
 import { API_URL } from '@/constants/api';
 import useSWR from 'swr';
 
-
 const Banner = ({onCategoryChange}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -110,8 +109,8 @@ const Banner = ({onCategoryChange}) => {
           }
           
           @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)); }
-            50% { filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8)); }
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 102, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(0, 102, 255, 0.8)); }
           }
           
           @keyframes orbit {
@@ -203,39 +202,29 @@ const Banner = ({onCategoryChange}) => {
 
       {/* Main Banner */}
       <div className="relative w-full rounded overflow-hidden shadow-xl">
-        {/* Animated gradient background */}
-        <div className="w-full h-[80vh] bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 animate-gradient-shift relative overflow-hidden">
+        {/* Updated background to match Elevate Gaming aesthetic */}
+        <div className="w-full h-[80vh] relative overflow-hidden bg-[#0B0719]">
+          {/* Background gradient overlay similar to Elevate Gaming */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0719] via-[#17143a] to-[#0B0719] opacity-90"></div>
+            <div className="absolute inset-0 bg-[url('/images/noise-texture.png')] opacity-5 mix-blend-overlay"></div>
+          </div>
+
+          {/* Dynamic subtle accents for premium feel */}
+          <div className="absolute inset-0 z-1">
+            {/* Glow effects similar to Elevate Gaming */}
+            <div className="absolute top-1/4 left-1/3 w-64 h-64 rounded-full bg-pink-600/10 blur-3xl"></div>
+            <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-blue-600/10 blur-3xl"></div>
+            <div className="absolute top-1/2 right-1/3 w-40 h-40 rounded-full bg-purple-600/10 blur-3xl animate-pulse"></div>
+          </div>
+
           {/* Header - Mobile Responsive */}
-          <div className="w-full">
+          <div className="w-full z-20 relative">
             <Header />
           </div>
 
-          {/* Animated background elements */}
-          <div className="absolute top-0 right-0 w-full h-full overflow-hidden">
-            {/* Dynamic background shapes */}
-            <div className="absolute top-0 left-0 w-full h-full">
-              <div className="absolute top-[10%] left-[5%] w-32 h-32 bg-blue-400/5 rounded-full animate-ping-slow"></div>
-              <div className="absolute bottom-[20%] right-[10%] w-40 h-40 bg-blue-300/5 rounded-full animate-ping-slow" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute top-[30%] right-[15%] w-24 h-24 bg-indigo-400/5 rounded-full animate-ping-slow" style={{ animationDelay: '1s' }}></div>
-            </div>
-            
-            {/* Geometric pattern elements */}
-            <div className="absolute top-10 right-10 w-6 h-6 md:w-10 md:h-10 border-2 border-blue-300 opacity-20 transform rotate-12 animate-pulse"></div>
-            <div className="absolute top-20 right-20 w-10 h-10 md:w-16 md:h-16 border-2 border-blue-300 opacity-10 transform -rotate-12 animate-fade-in-out"></div>
-            <div className="absolute bottom-10 right-6 w-8 h-8 md:w-12 md:h-12 border-2 border-blue-300 opacity-20 transform rotate-45 animate-move-in-out"></div>
-            <div className="hidden md:block absolute top-32 left-20 w-8 h-8 border-2 border-blue-300 opacity-10 transform animate-orbit" style={{ animationDelay: '2s' }}></div>
-            
-            {/* Additional decorative elements */}
-            <svg className="absolute top-[15%] left-[20%] w-16 h-16 text-blue-300/10 animate-move-in-out" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <svg className="absolute bottom-[25%] right-[25%] w-24 h-24 text-blue-300/10 animate-move-in-out" style={{ animationDelay: '3s' }} viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          
           {/* Carousel slides */}
-          <div className="relative h-full w-full overflow-hidden">
+          <div className="relative h-full w-full overflow-hidden z-10">
             {slides.map((slide, index) => (
               <div 
                 key={slide.id}
@@ -260,8 +249,8 @@ const Banner = ({onCategoryChange}) => {
                   
                   {/* Left side - Person with product */}
                   <div className="hidden md:flex w-full md:w-1/3 h-1/3 md:h-full items-center justify-center relative overflow-hidden">
-                    {/* Animated glow effect */}
-                    <div className="absolute w-24 h-24 md:w-36 md:h-36 bg-blue-500/10 rounded-full animate-ping-slow"></div>
+                    {/* Enhanced glow effect */}
+                    <div className="absolute w-40 h-40 md:w-56 md:h-56 bg-pink-500/20 rounded-full blur-xl animate-ping-slow"></div>
                     <img 
                       src={slide.leftImage.src} 
                       alt={`Person with ${slide.title}`}
@@ -281,13 +270,14 @@ const Banner = ({onCategoryChange}) => {
                       {slide.title}
                     </h2>
                     <p 
-                      className="text-sm sm:text-base md:text-lg text-blue-100 mb-4 opacity-0 animate-text-reveal"
+                      className="text-sm sm:text-base md:text-lg text-gray-300 mb-4 opacity-0 animate-text-reveal"
                       style={{ animationDelay: '0.5s' }}
                     >
                       {slide.subtitle}
                     </p>
+                    {/* Updated button style to match Elevate Gaming gradient */}
                     <button 
-                      className="bg-yellow-400 hover:bg-yellow-500 text-black text-xs sm:text-sm font-bold py-2 px-6 rounded-md transition-all duration-300 transform hover:scale-105 shadow-md opacity-0 animate-text-reveal"
+                      className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs sm:text-sm font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg opacity-0 animate-text-reveal"
                       style={{ animationDelay: '0.7s' }}
                     >
                       {slide.buttonText}
@@ -296,8 +286,8 @@ const Banner = ({onCategoryChange}) => {
                   
                   {/* Right side - Product image with dangling animation */}
                   <div className="hidden md:flex w-full md:w-1/3 h-1/3 md:h-full items-center justify-center relative">
-                    {/* Animated glow effect */}
-                    <div className="absolute w-24 h-24 md:w-36 md:h-36 bg-blue-400/20 rounded-full animate-ping-slow" style={{ animationDelay: '1s' }}></div>
+                    {/* Enhanced glow effect to match Elevate Gaming */}
+                    <div className="absolute w-40 h-40 md:w-56 md:h-56 bg-blue-600/20 rounded-full blur-xl animate-ping-slow" style={{ animationDelay: '1s' }}></div>
                     <img 
                       src={slide.rightImage.src} 
                       alt={slide.title}
@@ -313,27 +303,27 @@ const Banner = ({onCategoryChange}) => {
           </div>
         </div>
         
-        {/* Navigation arrows with proper icons */}
+        {/* Navigation arrows with updated styling to match dark theme */}
         <button 
           onClick={handlePrevSlide}
-          className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-white/90 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg z-10 border border-gray-200 hover:bg-white transition-colors duration-300"
+          className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-gray-900/70 hover:bg-gray-800 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg z-10 border border-gray-700 transition-colors duration-300"
           aria-label="Previous slide"
         >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         <button 
           onClick={handleNextSlide}
-          className="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-white/90 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg z-10 border border-gray-200 hover:bg-white transition-colors duration-300"
+          className="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-gray-900/70 hover:bg-gray-800 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shadow-lg z-10 border border-gray-700 transition-colors duration-300"
           aria-label="Next slide"
         >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
         
-        {/* Indicator dots with animations */}
+        {/* Indicator dots with updated styling */}
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
           {[0, 1, 2].map((index) => (
             <button
@@ -341,8 +331,8 @@ const Banner = ({onCategoryChange}) => {
               onClick={() => goToSlide(index)}
               className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
                 currentSlide === index 
-                  ? 'bg-white w-3 sm:w-4' 
-                  : 'bg-white/50 hover:bg-white/70'
+                  ? 'bg-pink-600 w-3 sm:w-4' 
+                  : 'bg-gray-500 hover:bg-gray-400'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -350,8 +340,8 @@ const Banner = ({onCategoryChange}) => {
         </div>
       </div>
       
-      {/* Categories section styled like the image */}
-      <div className="mx-auto max-w-6xl">
+      {/* Categories section styled with darker theme */}
+      <div className="mx-auto max-w-6xl  py-4">
         <CategoryFilter 
           activeCategory={activeCategory} 
           onCategoryChange={handleCategorySelection} 

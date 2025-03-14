@@ -9,6 +9,7 @@ import Why from '../components/Why';
 import FlashSales from '../components/flash-sales/FlashSales';
 import MainProduct from '../components/product/MainProduct';
 import { customLogoutUser } from '../store/actions/auth_actions';
+import ElevateGamingSection from '@/components/ElevateGamingSection';
 
 
 export default function Home() {
@@ -50,6 +51,7 @@ export default function Home() {
       <FlashSales />
   
       <MainProduct category={selectedCategory} />
+      <ElevateGamingSection />
       <MobileDownloadSection />
     </div>
   );

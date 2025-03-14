@@ -100,7 +100,7 @@ const About = () => {
               About <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 animate-gradient">Nanotech</span>
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              The premier destination for cutting-edge technology and gaming gear
+              The premier destination for cutting-edge technology 
             </p>
           </div>
           

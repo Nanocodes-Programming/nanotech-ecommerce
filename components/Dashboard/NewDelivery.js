@@ -339,7 +339,7 @@ const NewDelivery = () => {
                 <p>Please wait...</p>
               </Button>
             ) : (
-              <Button type="submit" loading={isOrdering}>
+              <Button className='bg-blue-600' type="submit" loading={isOrdering}>
                 Order bike
               </Button>
             )}

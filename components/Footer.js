@@ -191,15 +191,15 @@ const Footer = () => {
       <div className="mt-0 lg:mt-12">
         <div>
           <p className="text-center">
-            <Link href="#" className={styles?.anchor}>
+            <Link href="/privacy" className={styles?.anchor}>
               Privacy Policy
             </Link>{' '}
             |{' '}
-            <Link href="#" className={styles?.anchor}>
+            <Link href="/terms" className={styles?.anchor}>
               Terms of Use
             </Link>{' '}
             |{' '}
-            <Link href="#" className={styles?.anchor}>
+            <Link href="/refund-policy" className={styles?.anchor}>
               Refund Policy
             </Link>
           </p>

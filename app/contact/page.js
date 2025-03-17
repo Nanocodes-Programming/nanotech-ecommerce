@@ -178,10 +178,7 @@ const Contact = () => {
                   position={mapPosition}
                   title="Nanotech Store"
                   animation={window.google.maps.Animation.DROP}
-                  icon={{
-                    url: '/marker-icon.png', // You'll need to add this icon to your public folder
-                    scaledSize: new window.google.maps.Size(40, 40),
-                  }}
+                 
                 />
               </GoogleMap>
             )}

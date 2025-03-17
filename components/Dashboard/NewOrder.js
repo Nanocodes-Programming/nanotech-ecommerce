@@ -160,7 +160,7 @@ const NewOrder = () => {
   const updateAddress = async () => {
     try {
       const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
       );
 
       setValue('address', response?.data?.results[0]?.formatted_address);

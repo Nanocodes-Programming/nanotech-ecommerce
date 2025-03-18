@@ -142,7 +142,7 @@ const Contact = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Get In Touch</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions about our products or services? We're here to help and would love to hear from you.
+            Have questions about our products or services? We&apos;re here to help and would love to hear from you.
           </p>
         </div>
       </div>

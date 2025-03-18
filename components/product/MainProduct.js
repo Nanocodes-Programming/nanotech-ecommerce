@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import fresh from '../../images/ps5.webp';
+import fresh from '../../public/images/ps5.webp';
 
 import AutoSearch from '../AutoSearch';
 import MobileSearchBar from '../utils/reusables/MobileSearchBar';

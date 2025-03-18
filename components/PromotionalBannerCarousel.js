@@ -2,9 +2,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import nanobanner from '@/images/nanobanner.png';
-import nanobanner1 from '@/images/nanoflier.png';
-import nanobanner2 from '@/images/nanosticker.png';
+import nanobanner from '../public/images/nanobanner.png';
+import nanobanner1 from '../public/images/nanoflier.png';
+import nanobanner2 from '../public/images/nanosticker.png';
 
 const styles = {
   container: 'w-full bg-white py-6 px-4',

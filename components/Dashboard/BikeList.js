@@ -25,7 +25,7 @@ const BikeList = ({ bikeDeliveries }) => {
           </button>
         </div>
         {bikeDeliveries?.map((bikeDelivery) => (
-          <div className="flex flex-col p-2 border-b hover:shadow-md hover:cursor-cell px-5 pt-2">
+          <div key={bikeDelivery?.id} className="flex flex-col p-2 border-b hover:shadow-md hover:cursor-cell px-5 pt-2">
             <div className="flex items-center justify-between">
               <div className="flex justify-start items-center gap-2">
                 <div>

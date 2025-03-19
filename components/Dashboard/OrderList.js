@@ -33,6 +33,7 @@ const OrderList = ({ orderedItems }) => {
             </div>
             {orderedItem?.items?.map((item) => (
               <OrderCard
+                key={item?.id}
                 itemDetails={itemDetails}
                 orderedItem={item}
                 orderedItemsArr={orderedItem}

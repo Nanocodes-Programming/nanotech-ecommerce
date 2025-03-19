@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Cookies } from 'react-cookie';
 import { useRouter } from 'next/navigation';
 import useAuth from '../hooks/useAuth';
-import onics_logo from '../public/images/NANOTECH_022535.svg';
+import onics_logo from '../public/images/Nanotech.png';
 
 import { setAuthModal } from '../store/reducers/auth_reducer';
 import {

@@ -117,7 +117,7 @@ const CartPage = () => {
                     </div>
                     <h3 className="text-xl font-medium text-gray-900 mb-3">Your cart is empty</h3>
                     <p className="text-gray-500 mb-8 text-center max-w-md">
-                      Looks like you haven't added any products to your cart yet.
+                      Looks like you haven&apos;t added any products to your cart yet.
                     </p>
                     <button 
                       onClick={continueShopping}

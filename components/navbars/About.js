@@ -1,5 +1,5 @@
 import Header from '../Header';
-import AboutCard from '../utils/cards/AboutCard';
+
 
 const About = () => {
   return (
@@ -9,7 +9,7 @@ const About = () => {
       </div>
 
       <div className="flex items-center p-10">
-        <AboutCard />
+ 
       </div>
     </div>
   );

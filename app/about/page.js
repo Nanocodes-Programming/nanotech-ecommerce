@@ -71,10 +71,10 @@ export default function AboutUs() {
       <div className="absolute inset-0 overflow-hidden">
         {/* Base dark gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0B0719] via-[#17143a] to-[#0B0719]"></div>
-        
+
         {/* Grid pattern */}
         <div className="hex-grid w-full h-full"></div>
-        
+
         {/* Glowing orbs */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-600/10 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
@@ -85,9 +85,9 @@ export default function AboutUs() {
       <div className="w-full py-6 bg-[#0B0719]/80 backdrop-blur-sm border-b border-blue-500/20 z-10">
         <div className="container mx-auto px-4">
           <Link href="/" className="flex items-center">
-          <h2 className="text-2xl font-bold text-blue-400">Nanotech Store</h2>
+            <h2 className="text-2xl font-bold text-blue-400">Nanotech Store</h2>
           </Link>
-         
+
         </div>
       </div>
 
@@ -96,7 +96,7 @@ export default function AboutUs() {
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           {/* Decorative tech lines */}
           <div className="absolute top-0 left-1/2 w-px h-16 bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
-          
+
           {/* Title with glowing effect */}
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-6xl font-bold text-white glow-text mb-4 animate-float">
@@ -106,7 +106,7 @@ export default function AboutUs() {
               Your trusted destination for high-quality tech
             </p>
           </div>
-          
+
           {/* Decorative elements */}
           <div className="hidden md:block absolute -bottom-8 left-1/4 transform -translate-x-1/2">
             <div className="w-32 h-32 border-2 border-blue-500/20 rounded-full"></div>
@@ -139,7 +139,7 @@ export default function AboutUs() {
             <section className="mb-12 relative">
               <div className="absolute -left-4 h-full w-1 bg-gradient-to-b from-purple-500 to-pink-500"></div>
               <h2 className="text-2xl font-semibold text-purple-400 mb-4 glow-text">Why Choose Us?</h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-5 bg-[#17143a]/30 rounded-lg border border-purple-500/20 flex relative group hover:bg-[#17143a]/50 transition-all duration-300">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-40 rounded-lg blur-sm transition-all duration-300"></div>
@@ -153,7 +153,7 @@ export default function AboutUs() {
                     <p>We offer only top-quality laptops and tech gadgets from reputable brands.</p>
                   </div>
                 </div>
-                
+
                 <div className="p-5 bg-[#17143a]/30 rounded-lg border border-blue-500/20 flex relative group hover:bg-[#17143a]/50 transition-all duration-300">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-pink-600 opacity-0 group-hover:opacity-40 rounded-lg blur-sm transition-all duration-300"></div>
                   <div className="mr-4 text-blue-400">
@@ -166,7 +166,7 @@ export default function AboutUs() {
                     <p>Enjoy peace of mind with our 6-month warranty on all our products.</p>
                   </div>
                 </div>
-                
+
                 <div className="p-5 bg-[#17143a]/30 rounded-lg border border-pink-500/20 flex relative group hover:bg-[#17143a]/50 transition-all duration-300">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-40 rounded-lg blur-sm transition-all duration-300"></div>
                   <div className="mr-4 text-pink-400">
@@ -179,7 +179,7 @@ export default function AboutUs() {
                     <p>We ensure timely delivery of all orders with secure payment options.</p>
                   </div>
                 </div>
-                
+
                 <div className="p-5 bg-[#17143a]/30 rounded-lg border border-purple-500/20 flex relative group hover:bg-[#17143a]/50 transition-all duration-300">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-40 rounded-lg blur-sm transition-all duration-300"></div>
                   <div className="mr-4 text-purple-400">
@@ -198,7 +198,7 @@ export default function AboutUs() {
             <section className="mb-12 relative">
               <div className="absolute -left-4 h-full w-1 bg-gradient-to-b from-pink-500 to-blue-500"></div>
               <h2 className="text-2xl font-semibold text-pink-400 mb-4 glow-text">Exclusive Membership Benefits</h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
                 <div className="relative overflow-hidden rounded-xl">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl"></div>
@@ -227,7 +227,7 @@ export default function AboutUs() {
                     </ul>
                   </div>
                 </div>
-                
+
                 <div className="relative overflow-hidden rounded-xl">
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl"></div>
                   <div className="relative p-6 border border-pink-500/30 rounded-xl backdrop-blur-sm">
@@ -261,10 +261,10 @@ export default function AboutUs() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="p-6 bg-gradient-to-r from-blue-500/5 to-pink-500/5 border border-blue-500/20 rounded-lg">
                 <p className="text-center">
-                  At Nanotech Store, we believe in delivering value, quality, and exceptional service to our customers. Whether you're looking for a new laptop, accessories, or other tech gadgets, we've got you covered!
+                  At Nanotech Store, we believe in delivering value, quality, and exceptional service to our customers. Whether you&apos;re looking for a new laptop, accessories, or other tech gadgets, we&apos;ve got you covered!
                 </p>
               </div>
             </section>
@@ -314,16 +314,16 @@ export default function AboutUs() {
       {/* Tech circuit lines */}
       <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96">
         <svg className="w-full h-full text-blue-500/20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10,10 L30,10 L30,30 L50,30 L50,50 L70,50 L70,70 L90,70" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-          <path d="M10,30 L20,30 L20,50 L40,50 L40,70 L60,70 L60,90" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-          <path d="M30,10 L30,20 L50,20 L50,40 L70,40 L70,60 L90,60" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-          <circle cx="30" cy="10" r="2" fill="currentColor"/>
-          <circle cx="30" cy="30" r="2" fill="currentColor"/>
-          <circle cx="50" cy="30" r="2" fill="currentColor"/>
-          <circle cx="50" cy="50" r="2" fill="currentColor"/>
-          <circle cx="70" cy="50" r="2" fill="currentColor"/>
-          <circle cx="70" cy="70" r="2" fill="currentColor"/>
-          <circle cx="90" cy="70" r="2" fill="currentColor"/>
+          <path d="M10,10 L30,10 L30,30 L50,30 L50,50 L70,50 L70,70 L90,70" stroke="currentColor" strokeWidth="0.5" fill="none" />
+          <path d="M10,30 L20,30 L20,50 L40,50 L40,70 L60,70 L60,90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+          <path d="M30,10 L30,20 L50,20 L50,40 L70,40 L70,60 L90,60" stroke="currentColor" strokeWidth="0.5" fill="none" />
+          <circle cx="30" cy="10" r="2" fill="currentColor" />
+          <circle cx="30" cy="30" r="2" fill="currentColor" />
+          <circle cx="50" cy="30" r="2" fill="currentColor" />
+          <circle cx="50" cy="50" r="2" fill="currentColor" />
+          <circle cx="70" cy="50" r="2" fill="currentColor" />
+          <circle cx="70" cy="70" r="2" fill="currentColor" />
+          <circle cx="90" cy="70" r="2" fill="currentColor" />
         </svg>
       </div>
     </div>

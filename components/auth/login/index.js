@@ -303,7 +303,7 @@ const Login = () => {
         
         {/* Sign up link */}
         <div className="w-full flex items-center justify-center gap-2 p-4 border-t border-blue-500/30 bg-gray-900/50 backdrop-blur-sm z-10">
-          <p className="text-gray-300">Don't have an account?</p>
+          <p className="text-gray-300">Don&apos;t have an account?</p>
           <p className="cursor-pointer font-medium text-blue-400 hover:text-blue-300 transition-colors" onClick={handleSignup}>
             Sign up
           </p>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import onics_logo from '../../public/images/NANOTECH_022535.svg';
+import onics_logo from '../../public/images/Nanotech.png';
 import { customLogoutUser } from '../../store/actions/auth_actions';
 import { setAuthModal } from '../../store/reducers/auth_reducer';
 import { setDashboardPage } from '../../store/reducers/dashboard_reducer';

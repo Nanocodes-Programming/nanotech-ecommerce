@@ -27,11 +27,13 @@
     "react-search-autocomplete": "^8.5.2",
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
+    "sharp": "^0.33.5",
     "swr": "^2.3.3",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",

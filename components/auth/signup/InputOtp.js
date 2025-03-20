@@ -71,7 +71,7 @@ const InputOtp = ({ handleClose, handleSignupPage, getAllValues }) => {
           />
 
           <div className="ml-auto flex gap-1 mr-[5px]">
-            <p>Didn't get a code?</p>
+            <p>Didn&apos;t get a code?</p>
             <div>
               {resendingOtp ? (
                 <LoadingIcon />

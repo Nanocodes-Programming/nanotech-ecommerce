@@ -11,7 +11,7 @@ const Cart = () => {
       <div className="flex-1 w-full mt-5 p-2">
         <p className="font-semibold text-lg text-[#0000009e]">{`Cart (${cartItems?.length})`}</p>
         {cartItems?.map((cartItem) => (
-          <CartCard cartItem={cartItem} />
+          <CartCard cartItem={cartItem} key={cartItem?.id} />
         ))}
         {cartItems?.length === 0 && (
           <div className="flex justify-center -mt-40">

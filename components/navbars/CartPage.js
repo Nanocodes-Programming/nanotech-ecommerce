@@ -46,7 +46,7 @@ const CartPage = () => {
         <div className="flex-1 w-full mt-5 shadow-md rounded-md p-2">
           <p className="font-semibold text-lg text-[#0000009e]">{`Cart (${cartItems?.length})`}</p>
           {cartItems?.map((cartItem) => (
-            <CartCard cartItem={cartItem} />
+            <CartCard key={cartItem?.id} cartItem={cartItem} />
           ))}
 
           {cartItems?.length === 0 && (

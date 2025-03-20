@@ -2,7 +2,7 @@ import { useState } from 'react';
 import mobileGreenSvg from './utils/svgs/mobile-green-bg.svg';
 import mobilePinkSvg from './utils/svgs/mobile-pink-bg.svg';
 import mobileSvg from './utils/svgs/mobile.svg';
-import img from '@/images/img-1-9.webp'
+import img from '../public/images/img-1-9.webp'
 
 const styles = {
   main: 'flex flex-col justify-between -mt-44 md:mt-0 mb-24',

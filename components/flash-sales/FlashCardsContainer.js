@@ -128,7 +128,7 @@ const TrendingProductsCarousel = () => {
               </span>
               Trending Products
             </h2>
-            <p className="text-gray-500 ml-12">Discover what everyone's buying right now</p>
+            <p className="text-gray-500 ml-12">Discover what everyone&apos;s buying right now</p>
           </div>
           
           <div className="flex items-center">

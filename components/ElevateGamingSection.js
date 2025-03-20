@@ -3,11 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import gkey from '@/images/gkey.jpg';
-import gconsole from '@/images/gconsole.jpg';
-import gfam from '@/images/gfam.webp';
-// /Users/romeo1/Desktop/nanotech-ecommerce/images/g-console.jpg
-import gmouse from '@/images/gmouse.jpg';
+import gkey from '../public/images/gkey.jpg';
+import gconsole from '../public/images/gconsole.jpg';
+import gfam from '../public/images/gfam.webp';
+import gmouse from '../public/images/gmouse.jpg';
 
 // VideoModal component for playing YouTube videos
 const VideoModal = ({ videoId, onClose }) => {

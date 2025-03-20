@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import CategoryFilter from './CategoryFilter';
-import visionpro from '@/images/vision.png';
-import visionpro1 from '@/images/visionpro.png';
-import headset from '@/images/headset.webp';
-import mouse from '@/images/mouse.webp';
-import keyboard from '@/images/keyboard.webp';
-import girlyheady from '@/images/girlyheady.png';
+import visionpro from '../public/images/vision.png';
+import visionpro1 from '../public/images/visionpro.png';
+import headset from '../public/images/headset.webp';
+import mouse from '../public/images/mouse.webp';
+import keyboard from '../public/images/keyboard.webp';
+import girlyheady from '../public/images/girlyheady.png';
 import { API_URL } from '@/constants/api';
 import useSWR from 'swr';
 

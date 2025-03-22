@@ -38,6 +38,8 @@ const VideoModal = ({ videoId, onClose }) => {
   );
 };
 
+
+
 // VideoCard component
 const VideoCard = ({ imageSrc, videoId, onClick }) => {
   return (
@@ -72,29 +74,37 @@ const VideoCard = ({ imageSrc, videoId, onClick }) => {
 
 const ElevateGamingSection = () => {
   const [activeVideo, setActiveVideo] = useState(null);
+  const [mainVideoId, setMainVideoId] = useState(null);
+  const mainYoutubeVideoId = "eECNpQ67JRo"; 
   
   const videos = [
     {
       id: "jHd71igP_Sg",
-      thumbnail: gconsole, // You'll need to add these images to your public folder
-    },
-    {
-      id: "ORWeWr7bZyM",
-      thumbnail: gmouse,
+      thumbnail: gconsole, 
     },
     {
       id: "wxZ3OGZ7Nqc",
+      thumbnail: gmouse,
+    },
+    {
+      id: "ORWeWr7bZyM",
       thumbnail: gkey,
     }
   ];
   
   const playVideo = (videoId) => {
     setActiveVideo(videoId);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden'; 
+  };
+  
+  const playMainVideo = () => {
+    setMainVideoId(mainYoutubeVideoId);
+    document.body.style.overflow = 'hidden'; 
   };
   
   const closeVideo = () => {
     setActiveVideo(null);
+    setMainVideoId(null);
     document.body.style.overflow = ''; // Re-enable scrolling
   };
 
@@ -123,14 +133,15 @@ const ElevateGamingSection = () => {
               Engineered for Unparalleled Performance and Uncompromising Quality. Crafted with the finest materials and state-of-the-art technologies, our gaming gear is designed.
             </p>
             
-            <Link href="/shop">
-              <button className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-full transition-transform duration-300 hover:scale-105 shadow-lg">
-                <span>Watch Video</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </Link>
+            <button 
+              onClick={playMainVideo}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-full transition-transform duration-300 hover:scale-105 shadow-lg"
+            >
+              <span>Watch Video</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+              </svg>
+            </button>
           </div>
        
         </div>
@@ -150,8 +161,12 @@ const ElevateGamingSection = () => {
         </div>
       </div>
       
-      {/* Video Modal */}
-      {activeVideo && <VideoModal videoId={activeVideo} onClose={closeVideo} />}
+      {/* Video Modals */}
+      {(activeVideo || mainVideoId) && 
+        <VideoModal 
+          videoId={activeVideo || mainVideoId} 
+          onClose={closeVideo} 
+        />}
     </section>
   );
 };

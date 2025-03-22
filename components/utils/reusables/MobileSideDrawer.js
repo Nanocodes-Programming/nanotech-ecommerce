@@ -73,7 +73,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
         onClose={handleDrawerClose}
         PaperProps={{
           sx: {
-            backgroundColor: '#006400', // Dark green background
+            backgroundColor: '#0b0719', // Dark green background
             color: 'white'
           }
         }}
@@ -87,7 +87,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className="flex items-center gap-6 cursor-pointer hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                className="flex items-center gap-6 cursor-pointer hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -105,7 +105,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/about');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                className="flex items-center gap-6 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -123,7 +123,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                   router.push('/contact');
                   dispatch(setMobileSideDrawer(false));
                 }}
-                className="flex items-center gap-6 mb-5 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                className="flex items-center gap-6 mb-5 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
               >
                 <p
                   className={
@@ -137,7 +137,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
               </div>
             </div>
             {authenticated && (
-              <div className="w-[92%] absolute h-[1.5px] bg-green-700" />
+              <div className="w-[92%] absolute h-[1.5px] bg-[#0b0719f2]" />
             )}
 
             {authenticated && (
@@ -148,7 +148,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                  className="flex items-center gap-6 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -167,7 +167,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                  className="flex items-center gap-6 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -186,7 +186,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
                     router.push('/dashboard');
                     dispatch(setMobileSideDrawer(false));
                   }}
-                  className="flex items-center gap-6 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                  className="flex items-center gap-6 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
                 >
                   <p
                     className={
@@ -201,7 +201,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
 
                 <div 
                   onClick={logOut} 
-                  className="flex items-center gap-6 mb-2 hover:bg-green-700 py-2 px-2 rounded-md transition-colors"
+                  className="flex items-center gap-6 mb-2 hover:bg-[#0b0719f2] py-2 px-2 rounded-md transition-colors"
                 >
                   <p className="text-lg">Log out</p>
                 </div>
@@ -224,7 +224,7 @@ const MobileSideDrawer = ({ openDrawer }) => {
             <div>
               <div className="mb-2 w-full ml-5">
                 <button
-                  className="bg-transparent text-white w-[10rem] font-bold items-center border rounded-xl border-white outline-none py-3 hover:bg-green-700 transition-colors"
+                  className="bg-transparent text-white w-[10rem] font-bold items-center border rounded-xl border-white outline-none py-3 hover:bg-[#0b0719f2] transition-colors"
                   onClick={setLogin}
                 >
                   Log in

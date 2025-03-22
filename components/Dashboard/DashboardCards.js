@@ -92,7 +92,7 @@ const DashboardCards = ({ products }) => {
       <div className="mt-8 mb-6">
         <div className="flex justify-between items-center mb-4">
           <p className="font-semibold text-gray-800 text-xl">
-            Recommended groceries
+            Recommended Gadgets
           </p>
           <div className="flex gap-2">
             <button

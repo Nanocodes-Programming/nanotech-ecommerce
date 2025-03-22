@@ -262,7 +262,7 @@ const Banner = ({onCategoryChange}) => {
                   </div>
                   
                   {/* Center - Text and button - Full width on mobile */}
-                  <div className="w-full md:w-1/3 h-full flex flex-col justify-center items-center text-center px-4 md:px-0 z-10">
+                  <div className="w-full md:w-1/3 h-full flex flex-col text-white justify-center items-center text-center px-4 md:px-0 z-10">
                     <h2 
                       className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 opacity-0 animate-text-reveal"
                       style={{ animationDelay: '0.3s' }}
@@ -270,7 +270,7 @@ const Banner = ({onCategoryChange}) => {
                       {slide.title}
                     </h2>
                     <p 
-                      className="text-sm sm:text-base md:text-lg text-gray-300 mb-4 opacity-0 animate-text-reveal"
+                      className="text-sm sm:text-base text-white md:text-lg text-gray-300 mb-4 opacity-0 animate-text-reveal"
                       style={{ animationDelay: '0.5s' }}
                     >
                       {slide.subtitle}

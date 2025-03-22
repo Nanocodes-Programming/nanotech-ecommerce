@@ -99,7 +99,7 @@ const Signup = () => {
   ];
 
   const infoComponents = [
-    'Create your account to unlock exclusive  features',
+    'Create your account to unlock exclusive discounts',
     `We've sent a code to ${email}`,
     'Choose a strong password to protect your  account',
   ];

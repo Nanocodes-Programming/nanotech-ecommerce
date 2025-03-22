@@ -255,7 +255,7 @@ const NewOrder = () => {
                   type={'email'}
                   error={errors?.email?.message}
                   register={register('email')}
-                  placeholder={'onicsstore@gmail.com'}
+                  placeholder={'sales@nanotech.nanocodes.com.ng'}
                 />
                 {errors?.email?.message && (
                   <p className="-mt-4 mb-1 text-red-600">

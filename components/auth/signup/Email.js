@@ -75,7 +75,7 @@ const Email = ({ handleSignupPage, setValue, getAllValues }) => {
             type={'email'}
             error={errors?.email?.message}
             register={register('email')}
-            placeholder={'onicsstore@gmail.com'}
+            placeholder={'sales@nanotech.nanocodes.com.ng'}
           />
 
           <InputField
